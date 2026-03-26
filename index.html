@@ -1,628 +1,584 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>BOCRA Digital Services</title>
   <meta name="description" content="BOCRA Digital Regulatory Platform - licensing, complaints, domain services, consultations, cybersecurity, and regulatory resources." />
+  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+    /* --- Theme Variables --- */
     :root {
-      /* High-end minimalist palette */
-      --black: #000000;
-      --white: #ffffff;
-      --bg-page: #f9fafb; /* Ultra-clean off-white */
-      --text-main: #000000;
-      --text-muted: #3f3f46; /* Darker grey for high contrast readability */
-      --accent: #0055ff; /* Sharp electric blue for interactions */
-      --border-subtle: #e4e4e7;
+      /* Brand */
+      --brand-blue: #0b3c6d;
+      
+      /* Animated Logo Colors */
+      --bocra-blue: #1E6FDF;
+      --bocra-gold: #F4C542;
+      --bocra-green: #2E8B57;
+      --bocra-red: #E34234;
+      
+      /* Light Theme (Strict High-Contrast Minimalist) */
+      --bg-page: #f4f7fb;
+      --bg-surface: #ffffff;
+      --text-main: #000000; /* Pure Black Text */
+      --text-muted: #52525b; 
+      --border-color: #e4e4e7;
+      
+      /* Status Colors */
       --success: #16a34a;
       --success-bg: #dcfce7;
-      --danger: #dc2626;
-      --danger-bg: #fee2e2;
       --warning: #ca8a04;
       --warning-bg: #fef9c3;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
       
-      /* Refined soft shadows */
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-      --shadow-float: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-      
-      --radius: 16px;
+      /* UI Elements */
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
       --radius-sm: 8px;
-      --max: 1240px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    [data-theme="dark"] {
+      /* Dark Theme */
+      --bg-page: #09090b;
+      --bg-surface: #18181b;
+      --text-main: #ffffff; /* Pure White Text */
+      --text-muted: #a1a1aa;
+      --border-color: #27272a;
+      
+      /* Status Colors adjusted for dark mode */
+      --success: #4ade80;
+      --success-bg: rgba(22, 163, 74, 0.15);
+      --warning: #facc15;
+      --warning-bg: rgba(202, 138, 4, 0.15);
+      --danger: #f87171;
+      --danger-bg: rgba(220, 38, 38, 0.15);
 
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    /* --- Global Resets & Typography --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
-      margin: 0;
       font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg-page);
       color: var(--text-main);
       line-height: 1.6;
+      width: 100vw;
+      overflow-x: hidden;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--black);
-      margin: 0;
-      letter-spacing: -0.03em;
-      font-weight: 800;
-    }
-
+    h1, h2, h3, h4, h5, h6 { font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; color: var(--text-main); }
     p { color: var(--text-muted); }
-    a { color: inherit; text-decoration: none; }
-    img, svg { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; transition: all 0.2s ease; }
+    img, svg, video { max-width: 100%; display: block; }
+    button, input, select { font-family: inherit; }
+    :focus-visible { outline: 2px solid var(--text-main); outline-offset: 2px; }
 
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
+    .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-    .container {
-      width: min(100% - 40px, var(--max));
-      margin: 0 auto;
-    }
-
-    /* Minimalist Buttons */
+    /* --- Buttons & Badges --- */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      border-radius: 999px;
-      padding: 12px 24px;
-      font-size: 0.95rem;
-      transition: all 0.2s ease;
-      letter-spacing: -0.01em;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border: 1px solid transparent; cursor: pointer; font-weight: 600;
+      border-radius: 999px; padding: 12px 24px; font-size: 0.95rem;
+      transition: all 0.2s ease; letter-spacing: -0.01em;
     }
-
-    .btn-primary {
-      background: var(--black);
-      color: var(--white);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .btn-primary:hover {
-      background: var(--accent);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .btn-secondary {
-      background: var(--white);
-      color: var(--black);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--black);
-      background: #f4f4f5;
-    }
+    .btn-primary { background: var(--text-main); color: var(--bg-surface); box-shadow: var(--shadow-sm); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); opacity: 0.9; }
+    .btn-secondary { background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--border-color); }
+    .btn-secondary:hover { border-color: var(--text-main); background: var(--bg-page); }
 
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border-radius: 999px;
-      padding: 6px 12px;
+      display: inline-flex; align-items: center; gap: 6px;
+      border-radius: 999px; padding: 6px 12px; font-size: 0.75rem; font-weight: 700;
+      background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--border-color);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 4px var(--success-bg); }
+
+    /* --- Pre-Header (Top Bar) --- */
+    .top-bar {
+      background: #062444; /* Darker than brand blue */
+      color: rgba(255,255,255,0.8);
       font-size: 0.75rem;
-      font-weight: 700;
-      background: var(--white);
-      color: var(--black);
-      border: 1px solid var(--border-subtle);
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
+      font-weight: 500;
+      padding: 6px 0;
     }
+    .top-bar .container { display: flex; justify-content: space-between; align-items: center; }
+    .top-bar-contact { display: flex; gap: 20px; }
+    .top-bar-contact span { display: flex; align-items: center; gap: 6px; }
 
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 0 4px var(--success-bg);
-    }
-
-    /* Header */
+    /* --- Header & Desktop Navigation --- */
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-subtle);
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--brand-blue); color: #ffffff;
+      box-shadow: var(--shadow-md);
+    }
+    .header-row { display: flex; align-items: center; justify-content: space-between; min-height: 80px; gap: 20px; position: relative; }
+
+    /* --- Animated Brand Logo --- */
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.6rem; letter-spacing: -0.02em; color: #ffffff; transition: opacity 0.2s; }
+    .brand:hover { opacity: 0.9; }
+    .logo-dots { display: flex; gap: 6px; position: relative; margin-top: 4px; }
+    .animated-dot { width: 10px; height: 10px; border-radius: 50%; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+    .brand .animated-dot, .footer-brand .animated-dot { animation: pulseFloat 2s ease-in-out infinite; }
+    
+    .dot-1 { animation-delay: 0s; background: var(--bocra-blue); }
+    .dot-2 { animation-delay: 0.3s; background: var(--bocra-gold); }
+    .dot-3 { animation-delay: 0.6s; background: var(--bocra-green); }
+    .dot-4 { animation-delay: 0.9s; background: var(--bocra-red); }
+    
+    @keyframes pulseFloat {
+      0%, 100% { transform: scale(1) translateY(0px); filter: brightness(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+      50% { transform: scale(1.3) translateY(-3px); filter: brightness(1.2); box-shadow: 0 0 8px currentColor; }
     }
 
-    .header-row {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      min-height: 80px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--black);
-    }
-
-    .brand-img {
-      height: 40px;
-      width: auto;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .brand-text span {
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-text small {
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 0.65rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .desktop-nav {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-left: auto;
-    }
-
-    .nav-item { position: relative; }
-
+    .desktop-nav { display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; position: static; }
+    .nav-item { position: static; } 
+    
     .nav-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--black);
-      cursor: pointer;
-      transition: all 0.2s ease;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: 0.95rem;
+      color: #ffffff; cursor: pointer; transition: background 0.2s ease;
     }
+    .nav-link:hover, .nav-item.active-dropdown > .nav-link { background: rgba(255,255,255,0.15); }
 
-    .nav-link:hover,
-    .nav-item:hover > .nav-link {
-      background: #f4f4f5;
-      color: var(--accent);
-    }
-
-    /* Mega Menu */
+    /* --- Bulletproof Mega Menu --- */
     .mega-menu {
-      position: absolute;
-      top: calc(100% + 10px);
-      left: 50%;
-      transform: translateX(-50%) translateY(-10px);
-      width: min(900px, 90vw);
-      background: var(--white);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      box-shadow: var(--shadow-float);
-      padding: 24px;
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      gap: 32px;
-      visibility: hidden;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.2s ease;
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0; margin: 0 auto;
+      width: 100%; max-width: 1200px; 
+      background: var(--bg-surface); color: var(--text-main);
+      border: 1px solid var(--border-color); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg); padding: 24px; display: grid; grid-template-columns: 280px 1fr; gap: 32px;
+      visibility: hidden; opacity: 0; pointer-events: none; transition: all 0.2s ease; z-index: 1001;
+      transform: translateY(-10px);
     }
-
-    .nav-item:hover .mega-menu,
-    .nav-item:focus-within .mega-menu {
-      visibility: visible;
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
+    
+    .nav-item.active-dropdown .mega-menu {
+      visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0);
     }
-
-    .mega-side {
-      background: var(--bg-page);
-      border-radius: 12px;
-      padding: 20px;
-    }
-
-    .mega-side h4 { font-size: 1.05rem; margin-bottom: 8px; }
-    .mega-side p { font-size: 0.85rem; margin-bottom: 20px; line-height: 1.5; }
-
+    
+    .mega-side { background: var(--bg-page); border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--border-color); }
+    .mega-side h4 { font-size: 1.05rem; margin-bottom: 8px; color: var(--text-main); }
+    .mega-side p { font-size: 0.85rem; margin-bottom: 20px; line-height: 1.5; color: var(--text-muted); }
     .mega-shortcuts { display: grid; gap: 8px; }
     .mega-shortcuts a {
-      display: block;
-      background: var(--white);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--black);
-      transition: all 0.2s;
+      display: block; background: var(--bg-surface); border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm); padding: 10px 14px; font-weight: 600; font-size: 0.9rem;
+      transition: all 0.2s; color: var(--text-main);
     }
+    .mega-shortcuts a:hover { border-color: var(--text-main); transform: translateX(4px); }
+    
+    .mega-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding-top: 12px; }
+    .mega-col h5 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
+    .mega-col a { display: block; padding: 6px 0; font-size: 0.95rem; font-weight: 500; color: var(--text-main); }
+    .mega-col a:hover { color: var(--text-muted); text-decoration: underline; }
 
-    .mega-shortcuts a:hover {
-      border-color: var(--black);
-      transform: translateX(4px);
-    }
-
-    .mega-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .mega-col h5 {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .mega-col a {
-      display: block;
-      padding: 6px 0;
-      color: var(--black);
-      font-size: 0.95rem;
-      font-weight: 500;
-    }
-
-    .mega-col a:hover { color: var(--accent); }
-
-    .header-tools {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-left: 16px;
-    }
-
+    /* Header Tools */
+    .header-tools { display: flex; align-items: center; gap: 12px; }
     .search-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #f4f4f5;
-      border-radius: 999px;
-      padding: 0 16px;
-      height: 44px;
-      min-width: 240px;
-      transition: background 0.2s;
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(0,0,0,0.25); border-radius: 999px; padding: 0 16px; height: 44px;
+      border: 1px solid rgba(255,255,255,0.15); transition: all 0.2s; width: 240px;
     }
-
-    .search-wrap:focus-within {
-      background: var(--white);
-      box-shadow: 0 0 0 2px var(--accent);
-    }
-
-    .search-wrap svg { color: var(--text-muted); }
-
+    .search-wrap:focus-within { background: var(--bg-surface); border-color: var(--border-color); }
+    .search-wrap:focus-within svg { color: var(--text-main); }
+    .search-wrap:focus-within input { color: var(--text-main); }
+    .search-wrap svg { color: #ffffff; transition: color 0.2s; }
     .search-wrap input {
-      border: none;
-      outline: none;
-      width: 100%;
-      font-size: 0.95rem;
-      background: transparent;
-      color: var(--black);
-      font-weight: 500;
+      border: none; outline: none; width: 100%; font-size: 0.9rem;
+      background: transparent; color: #ffffff; font-family: inherit; font-weight: 500;
     }
+    .search-wrap input::placeholder { color: rgba(255,255,255,0.7); }
+    .search-wrap:focus-within input::placeholder { color: var(--text-muted); }
 
-    .icon-btn, .menu-toggle {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: transparent;
-      border: 1px solid transparent;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: var(--black);
-      transition: all 0.2s;
+    .icon-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: transparent; border: 1px solid rgba(255,255,255,0.3);
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer; color: #ffffff; transition: all 0.2s;
     }
-
-    .icon-btn:hover, .menu-toggle:hover {
-      background: #f4f4f5;
-    }
-
+    .icon-btn:hover { background: rgba(255,255,255,0.15); }
+    
+    .sun-icon { display: none; }
+    .moon-icon { display: block; }
+    [data-theme="dark"] .sun-icon { display: block; }
+    [data-theme="dark"] .moon-icon { display: none; }
     .menu-toggle { display: none; }
 
-    /* Hero Section */
-    .hero { padding: 40px 0; }
-
-    .hero-shell {
+    /* --- Immersive Cinematic Video Hero --- */
+    .hero {
       position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-      height: clamp(400px, 50vh, 600px);
-      background: var(--black);
-      display: flex;
-      align-items: flex-end;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.6;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: clamp(32px, 5vw, 64px);
-      width: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
-    }
-
-    .hero-content h1 {
-      color: var(--white);
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      line-height: 1.05;
-      max-width: 18ch;
-      margin: 16px 0;
-      letter-spacing: -0.04em;
-    }
-
-    .hero-content p {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.1rem;
-      max-width: 60ch;
-      font-weight: 400;
-    }
-
-    /* Floating Panels */
-    .hero-panels {
-      margin-top: -60px;
-      position: relative;
-      z-index: 10;
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 24px;
-      align-items: start;
-    }
-
-    .hero-actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    /* Clean White Cards */
-    .card {
-      background: var(--white);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.3s ease;
-    }
-
-    .action-card {
+      width: 100vw;
+      height: 85vh; /* Massive cinematic viewport */
       display: flex;
       flex-direction: column;
-      height: 100%;
-      text-decoration: none;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+    
+    .hero-bg-video {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0; pointer-events: none;
+    }
+    
+    /* Dark overlay guarantees text readability against any video */
+    .hero-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.65); z-index: 1; }
+    
+    .hero-content-wrapper {
+      position: relative; z-index: 2; width: 100%; 
+      display: flex; flex-direction: column; 
+      justify-content: center; align-items: center;
+      text-align: center;
+    }
+    
+    .hero-content { max-width: 800px; margin: 0 auto; }
+    .hero-content h1 { color: #ffffff; font-size: clamp(3rem, 6vw, 4.8rem); margin: 16px 0; letter-spacing: -0.03em; line-height: 1.1; }
+    .hero-content p { color: rgba(255, 255, 255, 0.9); font-size: 1.15rem; max-width: 60ch; font-weight: 400; margin: 0 auto; }
+
+    /* --- Central Content Sections --- */
+    section { padding: 80px 0; }
+    .section-head { margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+    .section-head h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--text-main); }
+    .section-head p { font-size: 1.05rem; max-width: 600px; margin-top: 8px; color: var(--text-muted); }
+    
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+    /* --- Exact KPI Dashboard (Cleanly Organized Below Hero) --- */
+    .kpi-dashboard {
+      position: relative;
+      z-index: 10;
+      padding-top: 60px; /* Clean spacing to ensure it doesn't overlap the video messily */
+      padding-bottom: 40px;
     }
 
-    .action-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--black);
+    .card {
+      background: var(--bg-surface); border: 1px solid var(--border-color);
+      border-radius: var(--radius-md); padding: 28px; box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease; display: flex; flex-direction: column;
     }
+    
+    .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--text-main); }
+    .stat-card .stat-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .stat-card h3 { font-size: 1.05rem; color: var(--text-main); font-weight: 700; }
+    
+    .stat-value { font-size: 2.8rem; font-weight: 800; color: #1f6feb; line-height: 1; letter-spacing: -0.03em;}
+    [data-theme="dark"] .stat-value { color: #ffffff; }
+    .trend { font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--success-bg); color: var(--success); }
 
+    /* --- Action & Activity Overview Layout --- */
+    .dashboard-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+
+    .quick-actions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .action-card { justify-content: center; padding: 20px; text-align: left; align-items: flex-start; cursor: pointer; }
+    .action-card:hover { transform: translateY(-4px); border-color: var(--text-main); box-shadow: var(--shadow-md); }
     .action-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: #f4f4f5;
-      color: var(--black);
-      display: grid;
-      place-items: center;
-      margin-bottom: 16px;
-      transition: all 0.3s;
+      width: 48px; height: 48px; border-radius: var(--radius-sm); background: var(--bg-page);
+      border: 1px solid var(--border-color); color: var(--text-main);
+      display: grid; place-items: center; margin-bottom: 12px; transition: all 0.3s;
     }
+    .action-card:hover .action-icon { background: var(--text-main); color: var(--bg-surface); border-color: var(--text-main); }
+    .action-card h3 { font-size: 1.05rem; margin-bottom: 4px; }
+    .action-card p { font-size: 0.85rem; margin: 0; color: var(--text-muted); }
 
-    .action-card:hover .action-icon {
-      background: var(--black);
-      color: var(--white);
+    /* Professional Horizontal Activity Chart */
+    .metrics-panel { justify-content: center; padding: 32px; }
+    .metrics-panel h3 { margin-bottom: 8px; font-size: 1.4rem; color: var(--text-main); }
+    .metrics-panel p { margin-bottom: 24px; font-size: 0.95rem; }
+    .pro-chart { display: flex; flex-direction: column; gap: 20px; }
+    .chart-item { width: 100%; }
+    .chart-info { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+    .chart-bar-bg { width: 100%; height: 8px; background: var(--bg-page); border-radius: 999px; overflow: hidden; border: 1px solid var(--border-color); }
+    .chart-bar-fill { 
+      height: 100%; border-radius: 999px; background: var(--text-main);
+      transform-origin: left; transform: scaleX(0); transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
+    .metrics-panel.in-view .chart-bar-fill { transform: scaleX(1); }
 
-    .action-card h3 { font-size: 1.05rem; margin-bottom: 6px; }
-    .action-card p { font-size: 0.9rem; margin: 0; line-height: 1.5; }
+    /* --- Stakeholders Section --- */
+    .stakeholder-card { text-align: left; align-items: flex-start; }
+    .stakeholder-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--text-main); }
 
-    /* Right Side Metrics */
-    .metrics-panel {
-      display: grid;
-      gap: 16px;
-    }
+    /* --- Updates/Articles --- */
+    .update-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 0.85rem; font-weight: 600; }
+    .pill { padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; border: 1px solid var(--border-color); background: var(--bg-page); color: var(--text-main); text-transform: uppercase; }
+    .pill.alert { background: var(--danger); color: #fff; border-color: var(--danger); }
 
-    .stat-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-weight: 500;
-      font-size: 0.95rem;
-    }
-    .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+    /* --- Platform Capabilities --- */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 
-    .stat-number {
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: var(--black);
-    }
-
-    /* Sections */
-    section { padding: 60px 0; }
-    .section-head { margin-bottom: 32px; }
-    .section-head h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); }
-    .section-head p { font-size: 1.1rem; max-width: 600px; margin-top: 8px; }
-
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-
-    /* Stat Cards */
-    .stat-card .stat-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
-    }
-    .stat-card h3 { font-size: 1rem; color: var(--text-muted); }
-    .stat-value { font-size: 2.5rem; font-weight: 800; color: var(--black); line-height: 1; letter-spacing: -0.03em;}
-    .trend { font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 6px; background: var(--success-bg); color: var(--success); }
-
-    /* CTA Band */
+    /* --- CTA Band --- */
     .cta-band {
-      background: var(--black);
-      color: var(--white);
-      border-radius: 24px;
-      padding: 48px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 32px;
-      align-items: center;
+      background: var(--text-main); color: var(--bg-surface); border-radius: var(--radius-lg);
+      padding: 56px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: center;
+      box-shadow: var(--shadow-lg);
     }
+    .cta-band h2 { font-size: 2.2rem; margin-bottom: 16px; color: var(--bg-surface); }
+    .cta-band p { color: rgba(255,255,255,0.8); font-size: 1.1rem; max-width: 600px; margin: 0; }
+    [data-theme="dark"] .cta-band p { color: rgba(0,0,0,0.8); }
+    .cta-actions { display: flex; gap: 16px; justify-content: flex-end; }
 
-    .cta-band h2 { color: var(--white); font-size: 2.2rem; margin-bottom: 12px; }
-    .cta-band p { color: #a1a1aa; font-size: 1.1rem; max-width: 600px; margin: 0; }
-    .cta-band .btn-secondary { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.3); }
-    .cta-band .btn-secondary:hover { background: var(--white); color: var(--black); }
-
-    /* Footer */
-    .site-footer {
-      background: var(--white);
-      border-top: 1px solid var(--border-subtle);
-      padding: 60px 0 20px;
+    /* --- Color-Matched Footer --- */
+    .site-footer { 
+      background: var(--brand-blue); /* Matched to Header */
+      color: #ffffff;
+      padding: 80px 0 24px; 
+      margin-top: 60px; 
     }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-
-    .footer-brand p { font-size: 0.95rem; margin-top: 16px; max-width: 300px; }
-    .footer-col h4 { font-size: 1rem; margin-bottom: 16px; }
+    [data-theme="dark"] .site-footer { background: #051628; border-top: 1px solid var(--border-color); }
+    
+    .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 60px; }
+    
+    .footer-brand { display: flex; flex-direction: column; align-items: flex-start; }
+    .footer-brand .brand { font-size: 1.8rem; margin-bottom: 16px; padding: 0; }
+    .footer-contact p { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-bottom: 6px; display: flex; gap: 8px;}
+    
+    .footer-col h4 { font-size: 1.05rem; margin-bottom: 20px; color: #ffffff; }
     .footer-links { display: grid; gap: 12px; }
-    .footer-links a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--black); }
+    .footer-links a { color: rgba(255,255,255,0.7); font-size: 0.95rem; font-weight: 500; }
+    .footer-links a:hover { color: #ffffff; }
 
-    .footer-bottom {
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 24px;
-      display: flex;
-      justify-content: space-between;
-      color: var(--text-muted);
-      font-size: 0.85rem;
+    /* High-End Embedded Map */
+    .footer-map { width: 100%; height: 200px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid rgba(255,255,255,0.2); }
+    .footer-map iframe { width: 100%; height: 100%; border: none; filter: grayscale(100%) contrast(1.2); }
+    [data-theme="dark"] .footer-map iframe { filter: grayscale(100%) invert(90%) contrast(1.2); }
+    
+    .footer-bottom { 
+      border-top: 1px solid rgba(255,255,255,0.2); 
+      padding-top: 24px; display: flex; justify-content: space-between; 
+      color: rgba(255,255,255,0.6); font-size: 0.85rem; 
     }
 
-    /* Animations */
-    .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    /* --- Cookie Banner --- */
+    .cookie-banner {
+      position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-surface);
+      border-top: 1px solid var(--border-color); padding: 16px 24px; z-index: 9999;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.1); transform: translateY(100%); transition: transform 0.4s ease;
+      display: flex; justify-content: center;
+    }
+    .cookie-banner.show { transform: translateY(0); }
+    .cookie-content { max-width: 1200px; display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%; }
+    .cookie-content p { margin: 0; font-size: 0.9rem; color: var(--text-main); font-weight: 500;}
+    .cookie-actions { display: flex; gap: 12px; flex-shrink: 0; }
+
+    /* --- Fully Restored Chatbot --- */
+    .chatbot-launcher {
+      position: fixed; right: 24px; bottom: 24px; width: 64px; height: 64px;
+      border-radius: 50%; background: var(--text-main); color: var(--bg-surface);
+      border: none; box-shadow: var(--shadow-lg); display: grid; place-items: center;
+      cursor: pointer; z-index: 2000; transition: transform 0.2s ease;
+    }
+    .chatbot-launcher:hover { transform: translateY(-4px); }
+    .chatbot-panel {
+      position: fixed; right: 24px; bottom: 100px; width: min(420px, calc(100vw - 48px)); height: min(650px, calc(100vh - 140px));
+      background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg); display: none; grid-template-rows: auto 1fr auto; z-index: 2100; overflow: hidden;
+    }
+    .chatbot-panel.open { display: grid; animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .chatbot-head { padding: 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: var(--bg-page); }
+    .chatbot-title { display: flex; align-items: center; gap: 12px; }
+    .chatbot-title-text strong { font-size: 1.05rem; display: block; margin-bottom: 2px;}
+    .chatbot-title-text span { font-size: 0.75rem; color: var(--text-muted); }
+    
+    .chatbot-tools { display: flex; gap: 8px; align-items: center;}
+    .chatbot-tools select { padding: 6px 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-main); font-size: 0.8rem; font-weight: 600;}
+    .chatbot-close { background: transparent; border: none; color: var(--text-main); cursor: pointer; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%;}
+    .chatbot-close:hover { background: var(--border-color); }
+    
+    .chatbot-body { padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: var(--bg-surface); }
+    .chat-row { display: flex; flex-direction: column; gap: 8px; }
+    .chat-bubble { max-width: 85%; padding: 12px 16px; border-radius: var(--radius-md); font-size: 0.95rem; line-height: 1.5; }
+    .chat-bubble.bot { background: var(--bg-page); border: 1px solid var(--border-color); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .chat-bubble.user { background: var(--text-main); color: var(--bg-surface); align-self: flex-end; border-bottom-right-radius: 4px; }
+    .chat-quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .chat-chip { padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-main); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .chat-chip:hover { border-color: var(--text-main); background: var(--bg-page); }
+
+    .chatbot-foot { padding: 16px; border-top: 1px solid var(--border-color); background: var(--bg-page); }
+    .chatbot-form { display: flex; gap: 10px; margin-bottom: 8px;}
+    .chatbot-form input { flex: 1; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 999px; background: var(--bg-surface); color: var(--text-main); font-size: 0.95rem; }
+    .chatbot-form input:focus { outline: 2px solid var(--text-main); }
+    .chatbot-send { padding: 0 20px; background: var(--text-main); color: var(--bg-surface); border: none; border-radius: 999px; cursor: pointer; font-weight: 600; transition: transform 0.2s;}
+    .chatbot-send:hover { transform: scale(1.05); }
+    .chatbot-hint { font-size: 0.7rem; color: var(--text-muted); text-align: center; display: block; }
+
+    /* --- Animations --- */
+    .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.in-view { opacity: 1; transform: translateY(0); }
 
-    /* Responsive */
+    /* --- Mobile Responsive Rules --- */
     @media (max-width: 1024px) {
-      .desktop-nav, .header-tools .search-wrap { display: none; }
-      .menu-toggle { display: inline-flex; }
-      .hero-panels { grid-template-columns: 1fr; margin-top: -40px; }
-      .grid-4 { grid-template-columns: repeat(2, 1fr); }
-      .cta-band { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+      .top-bar { display: none; }
+      .desktop-nav, .header-tools .search-wrap, .header-tools .btn { display: none; }
+      .menu-toggle { display: inline-flex; color: #ffffff; border-color: rgba(255,255,255,0.3); }
+      .grid-4, .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .dashboard-split { grid-template-columns: 1fr; }
+      .cta-band { grid-template-columns: 1fr; text-align: center; }
+      .cta-actions { justify-content: center; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 768px) {
-      .grid-4, .grid-3, .hero-actions { grid-template-columns: 1fr; }
-      .hero-shell { border-radius: 16px; height: 400px; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .cta-band { padding: 32px 20px; }
+      .container { padding: 0 20px; }
+      .hero { height: 70vh; }
+      
+      .grid-4, .grid-3, .feature-grid, .quick-actions-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .cta-band { padding: 40px 24px; }
       .cta-band h2 { font-size: 1.8rem; }
+      .chatbot-panel { right: 16px; bottom: 96px; width: calc(100vw - 32px); }
+      .chatbot-launcher { right: 16px; bottom: 16px; width: 56px; height: 56px; }
+      .mega-grid { grid-template-columns: 1fr; }
+      
+      .cookie-content { flex-direction: column; text-align: center; }
     }
 
-    /* Mobile Drawer */
-    .drawer-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000;
-      opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    }
+    /* --- Interactive Mobile Drawer --- */
+    .drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
     .drawer-overlay.show { opacity: 1; pointer-events: auto; }
-
     .mobile-drawer {
-      position: fixed; top: 0; right: 0; bottom: 0; width: 320px;
-      background: var(--white); z-index: 1001; transform: translateX(100%);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex; flex-direction: column;
+      position: fixed; top: 0; right: 0; bottom: 0; width: 100%; max-width: 340px; background: var(--bg-surface); z-index: 10001;
+      transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;
+      box-shadow: var(--shadow-lg); overflow-x: hidden;
     }
     .mobile-drawer.open { transform: translateX(0); }
-    .drawer-header { padding: 20px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); }
-    .drawer-content { padding: 20px; overflow-y: auto; }
+    .drawer-header { padding: 24px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); align-items: center; background: var(--brand-blue);}
+    .drawer-content { padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px;}
     
+    .mobile-group { border-bottom: 1px solid var(--border-color); }
+    .mobile-group summary { 
+      display: flex; justify-content: space-between; align-items: center; 
+      padding: 16px 0; font-weight: 700; font-size: 1.05rem; cursor: pointer; list-style: none; color: var(--text-main);
+    }
+    .mobile-group summary::-webkit-details-marker { display: none; }
+    .mobile-dropdown { display: flex; flex-direction: column; gap: 8px; padding-bottom: 16px; }
+    .mobile-dropdown a { 
+      padding: 10px 16px; background: var(--bg-page); border-radius: var(--radius-sm);
+      font-size: 0.95rem; font-weight: 500; color: var(--text-main);
+    }
+    .mobile-dropdown a:hover { background: var(--border-color); }
   </style>
 </head>
 <body>
 
+  <div class="top-bar">
+    <div class="container">
+      <div>Botswana Communications Regulatory Authority</div>
+      <div class="top-bar-contact">
+        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> +267 395 7755</span>
+        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> info@bocra.org.bw</span>
+      </div>
+    </div>
+  </div>
+
   <div class="drawer-overlay" id="drawerOverlay"></div>
   <aside class="mobile-drawer" id="mobileDrawer">
     <div class="drawer-header">
-      <div class="brand">
-        <svg class="brand-img" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 4L6 10v10c0 9.2 6.5 17.7 14 20 7.5-2.3 14-10.8 14-20V10L20 4Z" fill="#000000"/>
-          <path d="M20 12c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6Zm0 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4Z" fill="#ffffff"/>
-        </svg>
-        <div class="brand-text"><span>BOCRA</span></div>
-      </div>
-      <button class="icon-btn" id="closeDrawer">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      <a class="brand" href="#">
+        <span>BOCRA</span>
+        <div class="logo-dots">
+          <span class="animated-dot dot-1"></span>
+          <span class="animated-dot dot-2"></span>
+          <span class="animated-dot dot-3"></span>
+          <span class="animated-dot dot-4"></span>
+        </div>
+      </a>
+      <button class="icon-btn" id="closeDrawer" aria-label="Close Mobile Menu" style="border:none; color: #ffffff; background: transparent;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
     </div>
     <div class="drawer-content">
-      <a href="#cta" class="btn btn-primary" style="width: 100%; margin-bottom: 20px;">Login / Sign In</a>
-      <div style="display:grid; gap: 16px;">
-        <a href="#" style="font-weight: 600;">Consumers</a>
-        <a href="#" style="font-weight: 600;">Licences</a>
-        <a href="#" style="font-weight: 600;">Businesses</a>
-        <a href="#" style="font-weight: 600;">Domain Services</a>
-        <a href="#" style="font-weight: 600;">Cybersecurity</a>
+      <div class="search-wrap" style="width: 100%; background: var(--bg-page); border: 1px solid var(--border-color); margin-bottom: 8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" placeholder="Search regulations..." style="color: var(--text-main);"/>
       </div>
+      <a href="#cta" class="btn btn-primary" style="width: 100%;">Login / Sign In</a>
+      
+      <nav style="margin-top: 8px;">
+        <details class="mobile-group">
+          <summary>Consumers <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <div class="mobile-dropdown">
+            <a href="#">File a Complaint</a>
+            <a href="#">Track Complaint</a>
+            <a href="#">Consumer Protection</a>
+            <a href="#">Service Alerts</a>
+          </div>
+        </details>
+        
+        <details class="mobile-group">
+          <summary>Licences <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <div class="mobile-dropdown">
+            <a href="#">Apply Online</a>
+            <a href="#">Verify Public Register</a>
+            <a href="#">Renew Licence</a>
+            <a href="#">Fee Structure</a>
+          </div>
+        </details>
+
+        <details class="mobile-group">
+          <summary>Businesses <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <div class="mobile-dropdown">
+            <a href="#">Business Dashboard</a>
+            <a href="#">Regulatory Notices</a>
+            <a href="#">SLA Performance</a>
+          </div>
+        </details>
+
+        <details class="mobile-group">
+          <summary>Domain Services <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <div class="mobile-dropdown">
+            <a href="#">Registry Search</a>
+            <a href="#">Registrar Directory</a>
+            <a href="#">Domain Policies</a>
+          </div>
+        </details>
+
+        <details class="mobile-group">
+          <summary>Cybersecurity <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <div class="mobile-dropdown">
+            <a href="#">Threat Bulletins</a>
+            <a href="#">Incident Trends</a>
+            <a href="#">Awareness Content</a>
+          </div>
+        </details>
+      </nav>
     </div>
   </aside>
 
   <header class="site-header">
     <div class="container header-row">
-      <a href="#" class="brand">
-        <svg class="brand-img" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 4L6 10v10c0 9.2 6.5 17.7 14 20 7.5-2.3 14-10.8 14-20V10L20 4Z" fill="#000000"/>
-          <path d="M20 12c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6Zm0 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4Z" fill="#ffffff"/>
-          <text x="42" y="26" fill="#000000" font-family="Inter, sans-serif" font-weight="800" font-size="20" letter-spacing="-0.02em">BOCRA</text>
-        </svg>
+      <a class="brand" href="#" aria-label="BOCRA Home">
+        <span>BOCRA</span>
+        <div class="logo-dots">
+          <span class="animated-dot dot-1"></span>
+          <span class="animated-dot dot-2"></span>
+          <span class="animated-dot dot-3"></span>
+          <span class="animated-dot dot-4"></span>
+        </div>
       </a>
 
       <nav class="desktop-nav">
         <div class="nav-item">
-          <a class="nav-link">Consumers <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+          <a href="#" class="nav-link" aria-expanded="false">Consumers <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
           <div class="mega-menu">
             <div class="mega-side">
               <h4>Citizen Services</h4>
@@ -630,6 +586,7 @@
               <div class="mega-shortcuts">
                 <a href="#quick-actions">File a Complaint</a>
                 <a href="#updates">Consumer Help</a>
+                <a href="#">Cybersecurity Alerts</a>
               </div>
             </div>
             <div class="mega-grid">
@@ -638,6 +595,12 @@
                 <a href="#">File Complaint</a>
                 <a href="#">Track Complaint</a>
                 <a href="#">Consumer Protection</a>
+              </div>
+              <div class="mega-col">
+                <h5>Guidance</h5>
+                <a href="#">FAQs</a>
+                <a href="#">Help Centre</a>
+                <a href="#">Citizen Notices</a>
               </div>
               <div class="mega-col">
                 <h5>Alerts</h5>
@@ -656,7 +619,7 @@
         </div>
 
         <div class="nav-item">
-          <a class="nav-link">Licences <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+          <a href="#" class="nav-link" aria-expanded="false">Licences <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
           <div class="mega-menu">
             <div class="mega-side">
               <h4>Licensing Services</h4>
@@ -664,6 +627,7 @@
               <div class="mega-shortcuts">
                 <a href="#">Apply for Licence</a>
                 <a href="#">Verify Licence</a>
+                <a href="#">Fees & Guidelines</a>
               </div>
             </div>
             <div class="mega-grid">
@@ -675,30 +639,77 @@
               </div>
               <div class="mega-col">
                 <h5>Verification</h5>
-                <a href="#">Verify Licence</a>
-                <a href="#">Public Register</a>
+                <a href="#">Verify Public Register</a>
+                <a href="#">Check Application Status</a>
               </div>
               <div class="mega-col">
                 <h5>Guidance</h5>
                 <a href="#">Fee Structure</a>
-                <a href="#">Policies</a>
+                <a href="#">Regulatory Policies</a>
+              </div>
+              <div class="mega-col">
+                <h5>Insights</h5>
+                <a href="#">Volumes</a>
+                <a href="#">Turnaround Times</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="nav-item"><a class="nav-link">Businesses</a></div>
-        <div class="nav-item"><a class="nav-link">Domain Services</a></div>
-        <div class="nav-item"><a class="nav-link">Cybersecurity</a></div>
+        <div class="nav-item">
+          <a href="#" class="nav-link" aria-expanded="false">Businesses <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+          <div class="mega-menu">
+            <div class="mega-side">
+              <h4>Business Portal</h4>
+              <p>Designed for operators, regulated entities, and corporate licensees.</p>
+              <div class="mega-shortcuts">
+                <a href="#">Business Dashboard</a>
+                <a href="#">Compliance Notices</a>
+              </div>
+            </div>
+            <div class="mega-grid">
+              <div class="mega-col">
+                <h5>Applications</h5>
+                <a href="#">New Application</a>
+                <a href="#">Upload Documents</a>
+              </div>
+              <div class="mega-col">
+                <h5>Compliance</h5>
+                <a href="#">Regulatory Notices</a>
+                <a href="#">Deadlines</a>
+              </div>
+              <div class="mega-col">
+                <h5>Operations</h5>
+                <a href="#">Invoices and Fees</a>
+                <a href="#">Status Tracking</a>
+              </div>
+              <div class="mega-col">
+                <h5>Insights</h5>
+                <a href="#">Dashboard KPIs</a>
+                <a href="#">Response Times</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item"><a href="#" class="nav-link">Domain Services</a></div>
+        <div class="nav-item"><a href="#" class="nav-link">Cybersecurity</a></div>
       </nav>
 
       <div class="header-tools">
         <label class="search-wrap">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" placeholder="Search regulations, licences..." />
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" placeholder="Search resources..." aria-label="Search" />
         </label>
-        <a href="#cta" class="btn btn-primary">Login</a>
-        <button class="menu-toggle" id="openDrawer">
+        
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle Theme">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <a href="#cta" class="btn btn-primary" style="background:#ffffff; color:var(--brand-blue);">Login</a>
+        
+        <button class="menu-toggle" id="openDrawer" aria-label="Open menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
       </div>
@@ -707,56 +718,110 @@
 
   <main>
     <section class="hero" id="hero">
-      <div class="container">
-        <div class="hero-shell">
-          <img class="hero-bg" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2200&q=80" alt="BOCRA Platform" loading="lazy" />
-          <div class="hero-content">
-            <span class="badge"><span class="status-dot"></span> Next-Gen Platform</span>
-            <h1>Digital Regulatory Services</h1>
-            <p>Access licensing, complaints, domain services, and regulatory resources through a secure, data-driven platform.</p>
+      <div class="hero-shell">
+        <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" poster="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2200&q=80">
+          <source src="assets/bocra-hero.mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-network-of-connections-3156-large.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-overlay"></div>
+      </div>
+        
+      <div class="container hero-content-wrapper">
+        <div class="hero-content">
+          <span class="badge" style="background:rgba(255,255,255,0.15); color:#fff; border-color:rgba(255,255,255,0.3); backdrop-filter: blur(4px);"><span class="status-dot"></span> Next-Gen Platform</span>
+          <h1>BOCRA Digital Regulatory Services</h1>
+          <p>Access licensing, complaints, domain services, cybersecurity advisories, and regulatory resources through a secure, data-driven platform.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="kpi-dashboard container" id="quick-actions">
+      
+      <div class="section-head reveal" style="margin-bottom: 32px;">
+        <div>
+          <h2 style="color: var(--brand-blue);">Key statistics</h2>
+          <p>A homepage preview of analytics strengthens transparency and supports BOCRA's goal of data-driven digital services.</p>
+        </div>
+      </div>
+
+      <div class="grid-4 reveal">
+        <div class="card stat-card">
+          <div class="stat-top">
+            <h3>Active Licences</h3>
+            <span class="trend">+8.4%</span>
           </div>
+          <div class="stat-value count-up" data-target="3284">3,284</div>
+          <p style="margin-top:12px; font-size:0.85rem;">Current active regulated licences across services.</p>
+        </div>
+        <div class="card stat-card" style="transition-delay: 0.1s;">
+          <div class="stat-top">
+            <h3>Complaints Filed</h3>
+            <span class="trend">+4.1%</span>
+          </div>
+          <div class="stat-value count-up" data-target="624">624</div>
+          <p style="margin-top:12px; font-size:0.85rem;">Cases logged this period with guided intake workflows.</p>
+        </div>
+        <div class="card stat-card" style="transition-delay: 0.2s;">
+          <div class="stat-top">
+            <h3>Pending Applications</h3>
+            <span class="trend">+1.7%</span>
+          </div>
+          <div class="stat-value count-up" data-target="147">147</div>
+          <p style="margin-top:12px; font-size:0.85rem;">Applications currently under review or awaiting action.</p>
+        </div>
+        <div class="card stat-card" style="transition-delay: 0.3s;">
+          <div class="stat-top">
+            <h3>Avg Response Time</h3>
+            <span class="trend" style="color:var(--success); background:var(--success-bg);">Improving</span>
+          </div>
+          <div class="stat-value count-up" data-target="4.2" data-decimals="1" data-suffix="d">4.2d</div>
+          <p style="margin-top:12px; font-size:0.85rem;">Average turnaround time across tracked digital services.</p>
+        </div>
+      </div>
+
+      <div class="dashboard-split reveal">
+        <div class="quick-actions-grid">
+          <a href="#" class="card action-card">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
+            <h3>Apply for Licence</h3>
+            <p>Start new applications and track progress online.</p>
+          </a>
+          <a href="#" class="card action-card">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
+            <h3>File a Complaint</h3>
+            <p>Submit and track consumer or business disputes.</p>
+          </a>
+          <a href="#" class="card action-card">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+            <h3>Verify Licence</h3>
+            <p>Check the validity of BOCRA-regulated entities.</p>
+          </a>
+          <a href="#" class="card action-card">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+            <h3>Manage Domains</h3>
+            <p>Access .bw resources, policies, and registrar tools.</p>
+          </a>
         </div>
 
-        <div class="hero-panels reveal">
-          <div class="hero-actions" id="quick-actions">
-            <a href="#" class="card action-card">
-              <div class="action-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-              </div>
-              <h3>Apply for Licence</h3>
-              <p>Start new applications and track progress online.</p>
-            </a>
-
-            <a href="#" class="card action-card">
-              <div class="action-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-              </div>
-              <h3>File a Complaint</h3>
-              <p>Submit and track consumer or business disputes.</p>
-            </a>
-
-            <a href="#" class="card action-card">
-              <div class="action-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              </div>
-              <h3>Verify Licence</h3>
-              <p>Check the validity of BOCRA-regulated entities.</p>
-            </a>
-          </div>
-
-          <div class="card metrics-panel">
-            <h3>System Status</h3>
-            <div class="stat-row">
-              <span>Applications Processed</span>
-              <span class="stat-number count-up" data-target="1248">1,248</span>
+        <div class="card metrics-panel">
+          <h3>Service Activity Overview</h3>
+          <p style="font-size: 0.95rem; margin-bottom: 24px; margin-top:-8px; color:var(--text-muted);">Real-time volume distribution across platforms.</p>
+          <div class="pro-chart">
+            <div class="chart-item">
+              <div class="chart-info"><span>Licences</span><span>72%</span></div>
+              <div class="chart-bar-bg"><div class="chart-bar-fill" style="width: 72%; animation-delay: 0.1s;"></div></div>
             </div>
-            <div class="stat-row">
-              <span>Open Consultations</span>
-              <span class="stat-number count-up" data-target="12">12</span>
+            <div class="chart-item">
+              <div class="chart-info"><span>Complaints</span><span>48%</span></div>
+              <div class="chart-bar-bg"><div class="chart-bar-fill" style="width: 48%; animation-delay: 0.2s;"></div></div>
             </div>
-            <div class="stat-row">
-              <span>Active Alerts</span>
-              <span class="stat-number count-up" data-target="3">3</span>
+            <div class="chart-item">
+              <div class="chart-info"><span>Domains</span><span>58%</span></div>
+              <div class="chart-bar-bg"><div class="chart-bar-fill" style="width: 58%; animation-delay: 0.3s;"></div></div>
+            </div>
+            <div class="chart-item" style="margin-bottom:0;">
+              <div class="chart-info"><span>Consultations</span><span>38%</span></div>
+              <div class="chart-bar-bg"><div class="chart-bar-fill" style="width: 38%; animation-delay: 0.4s;"></div></div>
             </div>
           </div>
         </div>
@@ -766,74 +831,106 @@
     <section id="stakeholders">
       <div class="container">
         <div class="section-head reveal">
-          <h2>I am a...</h2>
-          <p>Select your role to access customized dashboards, workflows, and relevant regulatory information.</p>
+          <div>
+            <h2>I am a...</h2>
+            <p>Role-based entry points connect you directly to the workflows that matter most.</p>
+          </div>
         </div>
 
         <div class="grid-4">
           <a href="#" class="card action-card reveal">
             <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
             <h3>Citizen</h3>
-            <p>Track complaints, access consumer guidance, and alerts.</p>
+            <p>Track complaints, access consumer guidance, and cyber alerts.</p>
           </a>
-          <a href="#" class="card action-card reveal">
-            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path></svg></div>
+          <a href="#" class="card action-card reveal" style="transition-delay: 0.1s;">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg></div>
             <h3>Business / Licensee</h3>
-            <p>Manage applications, renewals, notices, and compliance.</p>
+            <p>Manage applications, renewals, notices, and compliance tasks.</p>
           </a>
-          <a href="#" class="card action-card reveal">
-            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+          <a href="#" class="card action-card reveal" style="transition-delay: 0.2s;">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="16" y="16" width="6" height="6" rx="1"></rect><rect x="2" y="16" width="6" height="6" rx="1"></rect><rect x="9" y="2" width="6" height="6" rx="1"></rect><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"></path><path d="M12 12V8"></path></svg></div>
             <h3>Registrar</h3>
-            <p>Access domain reports, policies, and stakeholder tools.</p>
+            <p>Access domain reports, audits, policies, and stakeholder submissions.</p>
           </a>
-          <a href="#" class="card action-card reveal">
+          <a href="#" class="card action-card reveal" style="transition-delay: 0.3s;">
             <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
             <h3>Researcher</h3>
-            <p>Explore statistics, open data, and regulatory reports.</p>
+            <p>Explore statistics, open data, consultations, and regulatory reports.</p>
           </a>
         </div>
       </div>
     </section>
 
-    <section id="stats">
+    <section id="updates">
       <div class="container">
         <div class="section-head reveal">
-          <h2>Key Statistics</h2>
-          <p>Real-time transparency into regulatory operations and service performance.</p>
+          <div>
+            <h2>Latest Updates</h2>
+            <p>Structured notices, consultations, and cybersecurity alerts.</p>
+          </div>
+          <a href="#" class="btn btn-secondary">View all updates</a>
         </div>
 
-        <div class="grid-4">
-          <div class="card stat-card reveal">
-            <div class="stat-top">
-              <h3>Active Licences</h3>
-              <span class="trend">+8.4%</span>
-            </div>
-            <div class="stat-value count-up" data-target="3284">3,284</div>
-            <p style="margin-top:12px; font-size:0.85rem;">Currently regulated entities.</p>
+        <div class="grid-3">
+          <article class="card action-card reveal">
+            <div class="update-meta"><span class="pill">Notice</span><span>Published today</span></div>
+            <h3 style="margin-bottom:8px;">New Licensing Guidelines Released</h3>
+            <p>Updated guidance for licence applications, renewals, and document submission requirements is now available.</p>
+          </article>
+          <article class="card action-card reveal" style="transition-delay: 0.1s;">
+            <div class="update-meta"><span class="pill" style="border-color:var(--warning); color:var(--warning);">Consultation</span><span>Deadline in 5 days</span></div>
+            <h3 style="margin-bottom:8px;">Open Public Consultation</h3>
+            <p>Review the consultation paper, download documents, and submit a response securely through the portal.</p>
+          </article>
+          <article class="card action-card reveal" style="transition-delay: 0.2s;">
+            <div class="update-meta"><span class="pill alert">Cyber Alert</span><span style="color:var(--danger)">Urgent advisory</span></div>
+            <h3 style="margin-bottom:8px;">Security Bulletin Published</h3>
+            <p>BOCRA has issued a cybersecurity advisory with recommended preventive actions for regulated entities.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Platform Capabilities</h2>
+            <p>Designed as the front end of a broader multi-role digital regulatory ecosystem.</p>
           </div>
-          <div class="card stat-card reveal">
-            <div class="stat-top">
-              <h3>Complaints Filed</h3>
-              <span class="trend">+4.1%</span>
-            </div>
-            <div class="stat-value count-up" data-target="624">624</div>
-            <p style="margin-top:12px; font-size:0.85rem;">Logged via guided intake.</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="card reveal">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg></div>
+            <h3>Search-first navigation</h3>
+            <p>Improved information discovery through clear entry points, role-based access, and intuitive mega menu structures.</p>
           </div>
-          <div class="card stat-card reveal">
-            <div class="stat-top">
-              <h3>Pending Cases</h3>
-              <span class="trend" style="color:var(--warning); background:var(--warning-bg)">Stable</span>
-            </div>
-            <div class="stat-value count-up" data-target="147">147</div>
-            <p style="margin-top:12px; font-size:0.85rem;">Awaiting officer action.</p>
+          <div class="card reveal" style="transition-delay: 0.1s;">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div>
+            <h3>Integration ready</h3>
+            <p>Designed to securely support licensing, CRM, CMS, domain registry, and other internal API-driven services.</p>
           </div>
-          <div class="card stat-card reveal">
-            <div class="stat-top">
-              <h3>Avg Response</h3>
-              <span class="trend">Target Met</span>
-            </div>
-            <div class="stat-value count-up" data-target="4.2" data-decimals="1" data-suffix="d">4.2d</div>
-            <p style="margin-top:12px; font-size:0.85rem;">Turnaround time.</p>
+          <div class="card reveal" style="transition-delay: 0.2s;">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+            <h3>Analytics enabled</h3>
+            <p>Supports dashboard previews, service metrics, usage patterns, and data-driven decision making capabilities.</p>
+          </div>
+          <div class="card reveal">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+            <h3>Security by design</h3>
+            <p>Built around secure authentication, role-based access control, protected uploads, and operational trust.</p>
+          </div>
+          <div class="card reveal" style="transition-delay: 0.1s;">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/><path d="M4 10h16"/><path d="M12 10v6"/><path d="M8 20l4-4 4 4"/></svg></div>
+            <h3>Accessible experience</h3>
+            <p>Responsive layouts, readable hierarchy, mobile support, and inclusive access tailored for different user groups.</p>
+          </div>
+          <div class="card reveal" style="transition-delay: 0.2s;">
+            <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+            <h3>Workflow focused</h3>
+            <p>Supports sophisticated self-service journeys such as applications, consultations, and stakeholder engagement.</p>
           </div>
         </div>
       </div>
@@ -847,8 +944,8 @@
             <p>Log in to securely manage your applications, submit documents, and track correspondence with BOCRA.</p>
           </div>
           <div class="cta-actions">
-            <a href="#" class="btn btn-secondary" style="background:var(--white); color:var(--black); border:none;">Access Dashboard</a>
-            <a href="#" class="btn btn-secondary">Create Account</a>
+            <a href="#" class="btn btn-secondary" style="background:var(--bg-surface); color:var(--text-main); border:none;">Access Dashboard</a>
+            <a href="#" class="btn btn-secondary" style="background:transparent; color:var(--bg-surface); border-color:rgba(255,255,255,0.3);">Create Account</a>
           </div>
         </div>
       </div>
@@ -857,13 +954,25 @@
 
   <footer class="site-footer" id="footer">
     <div class="container footer-grid">
+      
       <div class="footer-brand">
-        <svg class="brand-img" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 16px;">
-          <path d="M20 4L6 10v10c0 9.2 6.5 17.7 14 20 7.5-2.3 14-10.8 14-20V10L20 4Z" fill="#000000"/>
-          <path d="M20 12c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6Zm0 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4Z" fill="#ffffff"/>
-          <text x="42" y="26" fill="#000000" font-family="Inter, sans-serif" font-weight="800" font-size="20" letter-spacing="-0.02em">BOCRA</text>
-        </svg>
-        <p>A modern, secure, and integrated platform for regulatory services and public engagement.</p>
+        <h2 class="brand" style="margin-bottom: 16px; padding:0;">
+          <span>BOCRA</span>
+          <div class="logo-dots">
+            <span class="animated-dot dot-1"></span>
+            <span class="animated-dot dot-2"></span>
+            <span class="animated-dot dot-3"></span>
+            <span class="animated-dot dot-4"></span>
+          </div>
+        </h2>
+        <p style="max-width: 280px; color: rgba(255,255,255,0.8); margin-bottom:24px;">A modern, secure, and integrated platform for regulatory services and public engagement.</p>
+        
+        <div class="footer-links" style="display: flex; gap:16px;">
+          <a href="#" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a href="#" aria-label="X"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.73 16h5.13L9.13 4z"></path></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.17 1 12 1 12s0 3.83.46 5.58a2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.83 23 12 23 12s0-3.83-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg></a>
+        </div>
       </div>
 
       <div class="footer-col">
@@ -872,24 +981,37 @@
           <a href="#">Apply for Licence</a>
           <a href="#">File a Complaint</a>
           <a href="#">Verify Licence</a>
-        </div>
-      </div>
-
-      <div class="footer-col">
-        <h4>Resources</h4>
-        <div class="footer-links">
           <a href="#">Publications</a>
-          <a href="#">Notices</a>
-          <a href="#">Statistics</a>
+          <a href="#">Consultations</a>
         </div>
       </div>
 
       <div class="footer-col">
-        <h4>Connect</h4>
-        <div class="footer-links" style="display: flex; gap:16px;">
-          <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-          <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.73 16h5.13L9.13 4z"></path></svg></a>
-          <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+        <h4>Contact Us</h4>
+        <div class="footer-contact" style="display:flex; flex-direction:column; gap:10px;">
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.8); display: flex; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> 
+            <span>Plot 50671 Independence Avenue<br>Gaborone, Botswana</span>
+          </p>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.8); display: flex; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> 
+            <span>T: +267 395 7755</span>
+          </p>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.8); display: flex; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg> 
+            <span>F: +267 395 7976</span>
+          </p>
+          <p style="font-size: 0.85rem; color: rgba(255,255,255,0.8); display: flex; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> 
+            <span>E: info@bocra.org.bw</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Location</h4>
+        <div class="footer-map" style="width: 100%; height: 200px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
+          <iframe src="http://googleusercontent.com/maps.google.com/3" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width: 100%; height: 100%; border: none; filter: grayscale(100%) contrast(1.2);"></iframe>
         </div>
       </div>
     </div>
@@ -900,8 +1022,100 @@
     </div>
   </footer>
 
+  <button class="chatbot-launcher" id="chatbotLauncher" aria-label="Open chatbot">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+      <circle cx="12" cy="5" r="2"></circle>
+      <path d="M12 7v4"></path>
+      <line x1="8" y1="16" x2="8.01" y2="16"></line>
+      <line x1="16" y1="16" x2="16.01" y2="16"></line>
+    </svg>
+  </button>
+
+  <aside class="chatbot-panel" id="chatbotPanel" aria-hidden="true">
+    <div class="chatbot-head">
+      <div class="chatbot-title">
+        <div class="chatbot-title-text">
+          <strong>BOCRA Assistant</strong>
+          <span>Licences • Complaints • Domains • Cyber</span>
+        </div>
+      </div>
+
+      <div class="chatbot-tools">
+        <label class="sr-only" for="chatbotLang" style="display:none;">Language</label>
+        <select id="chatbotLang" aria-label="Language">
+          <option value="en" selected>English</option>
+          <option value="tn">Setswana</option>
+        </select>
+        <button class="chatbot-close" id="chatbotClose" aria-label="Close chatbot">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="chatbot-body" id="chatbotBody" role="log" aria-live="polite" aria-relevant="additions">
+      </div>
+
+    <div class="chatbot-foot">
+      <form class="chatbot-form" id="chatbotForm">
+        <input id="chatbotInput" type="text" placeholder="Ask about licences, complaints, domains..." autocomplete="off" />
+        <button class="chatbot-send" type="submit">Send</button>
+      </form>
+      <span class="chatbot-hint">
+        Prototype assistant. For official actions, use the service links on this page.
+      </span>
+    </div>
+  </aside>
+
+  <div id="cookieBanner" class="cookie-banner">
+    <div class="cookie-content">
+      <p>
+        We use cookies to enhance your experience, analyze site traffic, and support our regulatory mandate. By continuing to use this site, you consent to our use of cookies.
+      </p>
+      <div class="cookie-actions">
+        <button id="acceptCookies" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Accept</button>
+        <button id="declineCookies" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Decline</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Mobile menu toggle
+    // --- Mega Menu Click Logic ---
+    const navItems = document.querySelectorAll('.desktop-nav .nav-item');
+    navItems.forEach(item => {
+      const link = item.querySelector('.nav-link');
+      if(link) {
+        link.addEventListener('click', (e) => {
+          e.preventDefault(); 
+          navItems.forEach(other => {
+            if(other !== item) other.classList.remove('active-dropdown');
+          });
+          item.classList.toggle('active-dropdown');
+        });
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if(!e.target.closest('.desktop-nav')) {
+        navItems.forEach(item => item.classList.remove('active-dropdown'));
+      }
+    });
+
+    // --- Theme Toggle Logic ---
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const rootEl = document.documentElement;
+
+    const savedTheme = localStorage.getItem('bocra_theme') || 'light';
+    rootEl.setAttribute('data-theme', savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = rootEl.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', newTheme);
+      localStorage.setItem('bocra_theme', newTheme);
+    });
+
+    // --- Mobile Drawer Logic ---
     const openDrawerBtn = document.getElementById("openDrawer");
     const closeDrawerBtn = document.getElementById("closeDrawer");
     const mobileDrawer = document.getElementById("mobileDrawer");
@@ -910,54 +1124,54 @@
     function toggleDrawer() {
       mobileDrawer.classList.toggle("open");
       drawerOverlay.classList.toggle("show");
+      document.body.style.overflow = mobileDrawer.classList.contains("open") ? "hidden" : "";
     }
 
-    if(openDrawerBtn) openDrawerBtn.addEventListener("click", toggleDrawer);
-    if(closeDrawerBtn) closeDrawerBtn.addEventListener("click", toggleDrawer);
-    if(drawerOverlay) drawerOverlay.addEventListener("click", toggleDrawer);
+    if (openDrawerBtn) openDrawerBtn.addEventListener("click", toggleDrawer);
+    if (closeDrawerBtn) closeDrawerBtn.addEventListener("click", toggleDrawer);
+    if (drawerOverlay) drawerOverlay.addEventListener("click", toggleDrawer);
 
-    // Scroll reveal animation
-    const revealTargets = document.querySelectorAll(".reveal");
+    // --- Scroll Reveal Animations ---
+    const revealTargets = document.querySelectorAll(".reveal, .metrics-panel");
     const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("in-view");
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 });
     
-    revealTargets.forEach(target => revealObserver.observe(target));
+    revealTargets.forEach((item) => revealObserver.observe(item));
 
-    // Counter animation
+    // --- Number Counting Animation ---
     const counters = document.querySelectorAll(".count-up");
     const countObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const el = entry.target;
           const target = parseFloat(el.getAttribute('data-target'));
           const decimals = parseInt(el.getAttribute('data-decimals')) || 0;
-          const suffix = el.getAttribute('data-suffix') || '';
           
           let startTimestamp = null;
           const duration = 1500;
           const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            // easeOutQuart
-            const easeProgress = 1 - Math.pow(1 - progress, 4);
-            const current = target * easeProgress;
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const current = target * easeOutQuart;
             
             if (decimals > 0) {
-                el.innerText = current.toFixed(decimals) + suffix;
+                el.innerText = current.toFixed(decimals);
             } else {
-                el.innerText = Math.floor(current).toLocaleString() + suffix;
+                el.innerText = Math.floor(current).toLocaleString();
             }
+            
             if (progress < 1) {
               window.requestAnimationFrame(step);
             } else {
-               if (decimals > 0) el.innerText = target.toFixed(decimals) + suffix;
-               else el.innerText = target.toLocaleString() + suffix;
+               if (decimals > 0) el.innerText = target.toFixed(decimals);
+               else el.innerText = target.toLocaleString();
             }
           };
           window.requestAnimationFrame(step);
@@ -967,6 +1181,177 @@
     }, { threshold: 0.5 });
     
     counters.forEach(counter => countObserver.observe(counter));
+
+    // --- Full Chatbot Logic (English / Setswana) ---
+    const chatbotLauncher = document.getElementById("chatbotLauncher");
+    const chatbotPanel = document.getElementById("chatbotPanel");
+    const chatbotClose = document.getElementById("chatbotClose");
+    const chatbotBody = document.getElementById("chatbotBody");
+    const chatbotForm = document.getElementById("chatbotForm");
+    const chatbotInput = document.getElementById("chatbotInput");
+    const chatbotLang = document.getElementById("chatbotLang");
+
+    const KB = {
+      en: {
+        hello: "Hi — I’m the BOCRA Assistant. I can guide you to licensing, complaints, domain services, consultations, cybersecurity updates, and resources on this page.",
+        fallback: "I can help you find the right service fast. Tell me what you want to do (e.g., apply for a licence, file a complaint, verify a licence, manage domains).",
+        quick: ["Apply for Licence", "File a Complaint", "Verify Licence", "Manage Domains", "Consultations", "Cyber Alerts"],
+        intents: [
+          { keys: ["apply", "application", "licence", "license"], answer: "To start a licence application, use **Apply for Licence** in the Quick Actions area.", link: "#quick-actions" },
+          { keys: ["verify", "check", "status", "register"], answer: "To verify a licence, use **Verify Licence** under Quick Actions.", link: "#quick-actions" },
+          { keys: ["complaint", "complaints", "report", "issue", "consumer"], answer: "To file a complaint, select **File a Complaint** under Quick Actions.", link: "#quick-actions" },
+          { keys: ["domain", ".bw", "whois", "registrar"], answer: "For domain services, use **Manage Domains** under Quick Actions.", link: "#quick-actions" },
+          { keys: ["consultation", "consultations", "deadline"], answer: "For consultations, check the **Latest updates** section.", link: "#updates" },
+          { keys: ["cyber", "cybersecurity", "security", "alert", "threat"], answer: "For cybersecurity information, check **Latest updates** (Cyber Alert).", link: "#updates" },
+          { keys: ["statistics", "stats", "metrics", "numbers"], answer: "Key performance indicators are shown in **Key statistics**.", link: "#quick-actions" },
+        ],
+      },
+      tn: {
+        hello: "Dumêla — Nna ke Mothusi wa BOCRA. Ke ka go thusa go fitlhela ditirelo tsa dilaesense, dingongorego, ditirelo tsa domain, le dikitsiso mo tsebeng eno.",
+        fallback: "Mpolelele se o batlang go se dira (sekai: go dira kopo ya laesense, go tsenya ngongorego, go netefatsa laesense).",
+        quick: ["Apply for Licence", "File a Complaint", "Verify Licence", "Manage Domains", "Consultations", "Cyber Alerts"],
+        intents: [
+          { keys: ["apply", "application", "licence", "license", "laesense", "kopo"], answer: "Go simolola kopo ya laesense, dirisa **Apply for Licence** mo Quick Actions.", link: "#quick-actions" },
+          { keys: ["verify", "check", "status", "netefatsa", "register"], answer: "Go netefatsa laesense, dirisa **Verify Licence** mo Quick Actions.", link: "#quick-actions" },
+          { keys: ["complaint", "complaints", "ngongorego", "report", "issue", "consumer"], answer: "Go tsenya ngongorego, tlhopha **File a Complaint** mo Quick Actions.", link: "#quick-actions" },
+          { keys: ["domain", ".bw", "whois", "registrar"], answer: "Ka ga ditirelo tsa domain, dirisa **Manage Domains** mo Quick Actions.", link: "#quick-actions" },
+          { keys: ["consultation", "consultations", "dipuisano"], answer: "Ka ga dipuisano, lebelela **Latest updates**.", link: "#updates" },
+          { keys: ["cyber", "cybersecurity", "security", "alert"], answer: "Ka ga cybersecurity, lebelela **Latest updates** (Cyber Alert).", link: "#updates" },
+          { keys: ["statistics", "stats", "metrics", "dipalo"], answer: "Dipalo tsa botlhokwa di mo **Key statistics**.", link: "#quick-actions" },
+        ],
+      },
+    };
+
+    function setLang(lang) {
+      const selected = KB[lang] ? lang : "en";
+      chatbotLang.value = selected;
+      localStorage.setItem("bocra_chat_lang", selected);
+      chatbotInput.placeholder = selected === "tn" ? "Botsisa ka dilaesense, dingongorego..." : "Ask about licences, complaints, domains...";
+    }
+
+    function scrollToAnchor(hash) {
+      const el = document.querySelector(hash);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function addMessage({ role, text, quickReplies }) {
+      const row = document.createElement("div");
+      row.className = `chat-row ${role}`;
+      const bubble = document.createElement("div");
+      bubble.className = `chat-bubble ${role}`;
+      bubble.textContent = text;
+      row.appendChild(bubble);
+      chatbotBody.appendChild(row);
+
+      if (quickReplies && quickReplies.length) {
+        const quick = document.createElement("div");
+        quick.className = "chat-quick";
+        quickReplies.forEach((label) => {
+          const chip = document.createElement("button");
+          chip.type = "button";
+          chip.className = "chat-chip";
+          chip.textContent = label;
+          chip.addEventListener("click", () => {
+            chatbotInput.value = label;
+            chatbotForm.dispatchEvent(new Event("submit", { cancelable: true }));
+          });
+          quick.appendChild(chip);
+        });
+        chatbotBody.appendChild(quick);
+      }
+      chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    }
+
+    function findIntentAnswer(lang, message) {
+      const kb = KB[lang] || KB.en;
+      const input = message.toLowerCase();
+      for (const intent of kb.intents) {
+        if (intent.keys.some((k) => input.includes(k))) return intent;
+      }
+      return null;
+    }
+
+    function botReply(message) {
+      const lang = chatbotLang.value || "en";
+      const kb = KB[lang] || KB.en;
+      const trimmed = message.trim();
+      if (!trimmed) return;
+
+      if (/^(hi|hello|hey|dum[eê]la|dumela)\b/i.test(trimmed)) {
+        addMessage({ role: "bot", text: kb.hello, quickReplies: kb.quick });
+        return;
+      }
+
+      const intent = findIntentAnswer(lang, trimmed);
+      if (intent) {
+        addMessage({ role: "bot", text: intent.answer, quickReplies: kb.quick.slice(0, 3) });
+        if (intent.link) {
+          const follow = lang === "tn" ? "Ke go isa mo karolong e e amang seno mo tsebeng." : "I’ll take you to the relevant section on this page.";
+          addMessage({ role: "bot", text: follow });
+          scrollToAnchor(intent.link);
+        }
+        return;
+      }
+      addMessage({ role: "bot", text: kb.fallback, quickReplies: kb.quick });
+    }
+
+    function toggleChatbot() {
+      chatbotPanel.classList.toggle("open");
+      if (chatbotPanel.classList.contains("open")) {
+        setTimeout(() => chatbotInput.focus(), 50);
+        if (!chatbotBody.dataset.booted) {
+          chatbotBody.dataset.booted = "true";
+          const lang = chatbotLang.value || "en";
+          addMessage({ role: "bot", text: (KB[lang] || KB.en).hello, quickReplies: (KB[lang] || KB.en).quick });
+        }
+      }
+    }
+
+    if (chatbotLauncher) chatbotLauncher.addEventListener("click", toggleChatbot);
+    if (chatbotClose) chatbotClose.addEventListener("click", toggleChatbot);
+
+    if (chatbotLang) {
+      const saved = localStorage.getItem("bocra_chat_lang") || "en";
+      setLang(saved);
+      chatbotLang.addEventListener("change", () => {
+        setLang(chatbotLang.value);
+        const lang = chatbotLang.value || "en";
+        const prompt = lang === "tn" ? "Puo e fetotswe. O ka botsa potso." : "Language updated. Ask your question.";
+        addMessage({ role: "bot", text: prompt, quickReplies: (KB[lang] || KB.en).quick });
+      });
+    }
+
+    if (chatbotForm) {
+      chatbotForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const text = chatbotInput.value;
+        if (!text.trim()) return;
+        chatbotInput.value = "";
+        addMessage({ role: "user", text });
+        setTimeout(() => botReply(text), 300);
+      });
+    }
+
+    // --- Cookie Banner Logic ---
+    const cookieBanner = document.getElementById('cookieBanner');
+    const acceptBtn = document.getElementById('acceptCookies');
+    const declineBtn = document.getElementById('declineCookies');
+
+    // Make the cookie banner pop up 1 second after page loads
+    if (!localStorage.getItem('bocra_cookies_handled')) {
+      setTimeout(() => {
+        cookieBanner.classList.add('show');
+      }, 1000);
+    }
+
+    function hideCookieBanner() {
+      cookieBanner.classList.remove('show');
+      localStorage.setItem('bocra_cookies_handled', 'true');
+    }
+
+    if (acceptBtn) acceptBtn.addEventListener('click', hideCookieBanner);
+    if (declineBtn) declineBtn.addEventListener('click', hideCookieBanner);
   </script>
 </body>
 </html>
