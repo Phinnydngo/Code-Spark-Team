@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>BOCRA Digital Services</title>
   <meta name="description" content="BOCRA Digital Regulatory Platform - licensing, complaints, domain services, consultations, cybersecurity, and regulatory resources." />
-  
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -442,8 +442,8 @@
           </div>
         </div>
 
-        <div class="nav-item"><a href="#" class="nav-link">Domains</a></div>
-        <div class="nav-item"><a href="#" class="nav-link">Tarrifs</a></div>
+        <div class="nav-item"><a href="./domains.html" class="nav-link">Domains</a></div>
+        <div class="nav-item"><a href="./tariffs.html" class="nav-link">Tarrifs</a></div>
       </nav>
 
       <div class="header-tools">
@@ -477,6 +477,65 @@
         </div>
       </div>
     </section>
+
+    <section id="stakeholders" class="pillars-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <h2>BOCRA's Core Services</h2>
+        <p>
+          BOCRA regulates and oversees four critical sectors essential to Botswana's digital and communications infrastructure.
+        </p>
+      </div>
+    </div>
+
+    <div class="pillars-grid">
+      <article class="pillar-card telecom reveal">
+        <div class="pillar-card-top">
+          <div class="pillar-icon-box">T</div>
+          <span class="pillar-tag">Core Regulation</span>
+        </div>
+        <h3>Telecommunications</h3>
+        <p>
+          Licensing, spectrum management, quality of service standards, and consumer protection in the telecommunications sector.
+        </p>
+      </article>
+
+      <article class="pillar-card broadcasting reveal" style="transition-delay: 0.1s;">
+        <div class="pillar-card-top">
+          <div class="pillar-icon-box">B</div>
+          <span class="pillar-tag">Content & Standards</span>
+        </div>
+        <h3>Broadcasting</h3>
+        <p>
+          Content regulation, licensing for broadcast entities, technical standards, and adherence to broadcasting codes.
+        </p>
+      </article>
+
+      <article class="pillar-card postal reveal" style="transition-delay: 0.2s;">
+        <div class="pillar-card-top">
+          <div class="pillar-icon-box">P</div>
+          <span class="pillar-tag">National Service</span>
+        </div>
+        <h3>Postal Services</h3>
+        <p>
+          Universal postal service provisions, licensing of postal operators, and standards for mail delivery services.
+        </p>
+      </article>
+
+      <article class="pillar-card internet reveal" style="transition-delay: 0.3s;">
+        <div class="pillar-card-top">
+          <div class="pillar-icon-box">I</div>
+          <span class="pillar-tag">Digital Oversight</span>
+        </div>
+        <h3>Internet</h3>
+        <p>
+          Internet governance, cybersecurity oversight, domain registry management, and protection of internet infrastructure.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
 
     <section class="kpi-dashboard container" id="quick-actions">
       
@@ -571,96 +630,99 @@
       </div>
     </section>
 
-    <section id="stakeholders">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>BOCRA's Regulatory Pillars</h2>
-            <p>BOCRA regulates and oversees four critical sectors essential to Botswana's digital and communications infrastructure.</p>
-          </div>
-        </div>
 
-        <div class="grid-4">
-          <div class="card action-card reveal">
-            <h3>Telecommunications</h3>
-            <p>Licensing, spectrum management, quality of service standards, and consumer protection in the telecommunications sector.</p>
-          </div>
-          <div class="card action-card reveal" style="transition-delay: 0.1s;">
-            <h3>Broadcasting</h3>
-            <p>Content regulation, licensing for broadcast entities, technical standards, and adherence to broadcasting codes.</p>
-          </div>
-          <div class="card action-card reveal" style="transition-delay: 0.2s;">
-            <h3>Postal Services</h3>
-            <p>Universal postal service provisions, licensing of postal operators, and standards for mail delivery services.</p>
-          </div>
-          <div class="card action-card reveal" style="transition-delay: 0.3s;">
-            <h3>Internet</h3>
-            <p>Internet governance, cybersecurity oversight, domain registry management, and protection of internet infrastructure.</p>
-          </div>
-        </div>
+    <section id="updates" class="news-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <h2>BOCRA News</h2>
+        <p>Latest updates, releases, and public announcements from the Botswana Communications Regulatory Authority.</p>
       </div>
-    </section>
+    </div>
 
-    <section id="updates" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 80px 0; background: var(--bg-page);">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>BOCRA News</h2>
-            <p>Latest updates and announcements from the Botswana Communications Regulatory Authority.</p>
-          </div>
+    <div class="news-grid">
+      <article class="news-card reveal">
+        <div class="news-meta">
+          <span class="news-category">Infrastructure</span>
+          <time datetime="2026-03-18">18 March 2026</time>
         </div>
+        <h3>Digital Infrastructure Investment</h3>
+        <p>
+          BOCRA continues to support investments in broadband expansion across all regions of Botswana, helping extend reliable access to digital services and communications infrastructure.
+        </p>
+        <a href="#" class="news-link">Read More</a>
+      </article>
 
-        <div class="grid-4" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 32px;">
-          <article class="card reveal">
-            <h3 style="margin-bottom: 12px; color: var(--brand-blue);">Digital Infrastructure Investment</h3>
-            <p style="font-size: 0.9rem; line-height: 1.6;">BOCRA continues to support investments in broadband expansion across all regions of Botswana, ensuring equal access to digital services.</p>
-            <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 12px; display: block;">March 2026</span>
-          </article>
-          <article class="card reveal" style="transition-delay: 0.1s;">
-            <h3 style="margin-bottom: 12px; color: var(--brand-blue);">Spectrum Auction Scheduled</h3>
-            <p style="font-size: 0.9rem; line-height: 1.6;">Applications for new spectrum frequencies are now open. Licensed operators can apply for 5G frequencies to enhance mobile connectivity services.</p>
-            <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 12px; display: block;">March 2026</span>
-          </article>
-          <article class="card reveal" style="transition-delay: 0.2s;">
-            <h3 style="margin-bottom: 12px; color: var(--brand-blue);">Consumer Rights Guideline</h3>
-            <p style="font-size: 0.9rem; line-height: 1.6;">New consumer protection guidelines have been released to strengthen the rights of telecommunications and broadcasting consumers.</p>
-            <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 12px; display: block;">February 2026</span>
-          </article>
-          <article class="card reveal" style="transition-delay: 0.3s;">
-            <h3 style="margin-bottom: 12px; color: var(--brand-blue);">Cybersecurity Framework Update</h3>
-            <p style="font-size: 0.9rem; line-height: 1.6;">BOCRA has issued updated cybersecurity framework requirements for all regulated sectors to enhance data protection and network security.</p>
-            <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 12px; display: block;">February 2026</span>
-          </article>
+      <article class="news-card reveal" style="transition-delay: 0.1s;">
+        <div class="news-meta">
+          <span class="news-category">Spectrum</span>
+          <time datetime="2026-03-12">12 March 2026</time>
         </div>
-      </div>
-    </section>
+        <h3>Spectrum Auction Scheduled</h3>
+        <p>
+          Applications for new spectrum frequencies are now open, giving licensed operators an opportunity to apply for 5G frequencies and strengthen mobile connectivity services.
+        </p>
+        <a href="#" class="news-link">Read More</a>
+      </article>
 
-
-
-    <section id="cta">
-      <div class="container reveal">
-        <div class="cta-band">
-          <div>
-            <h2>Ready to access your dashboard?</h2>
-            <p>Log in to securely manage your applications, submit documents, and track correspondence with BOCRA.</p>
-          </div>
-          <div class="cta-actions">
-            <a href="#" class="btn btn-secondary" style="background:var(--bg-surface); color:var(--text-main); border:none;">Access Dashboard</a>
-            <a href="#" class="btn btn-secondary" style="background:transparent; color:var(--bg-surface); border-color:rgba(255,255,255,0.3);">Create Account</a>
-          </div>
+      <article class="news-card reveal" style="transition-delay: 0.2s;">
+        <div class="news-meta">
+          <span class="news-category">Consumer Protection</span>
+          <time datetime="2026-02-24">24 February 2026</time>
         </div>
-      </div>
-    </section>
+        <h3>Consumer Rights Guideline Released</h3>
+        <p>
+          New consumer protection guidelines have been issued to strengthen the rights of telecommunications and broadcasting consumers across regulated services.
+        </p>
+        <a href="#" class="news-link">Read More</a>
+      </article>
 
-    <section id="map-section" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 0;">
-      <div class="map-section">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3587.659359675841!2d25.918903!3d-24.660144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ebf3a388b10850b%3A0x6b7fa09d0d34b3f0!2sBotswana%20Communications%20Regulatory%20Authority!5e0!3m2!1sen!2sbw!4v1700000000000!5m2!1sen!2sbw" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-    </section>
-  </main>
+      <article class="news-card reveal" style="transition-delay: 0.3s;">
+        <div class="news-meta">
+          <span class="news-category">Cybersecurity</span>
+          <time datetime="2026-02-10">10 February 2026</time>
+        </div>
+        <h3>Cybersecurity Framework Update</h3>
+        <p>
+          BOCRA has issued updated cybersecurity framework requirements for regulated sectors to improve data protection, network resilience, and security standards.
+        </p>
+        <a href="#" class="news-link">Read More</a>
+      </article>
+    </div>
+  </div>
+</section>
 
-  <footer class="site-footer" id="footer">
-    <div class="container footer-grid">
+
+
+<section id="cta">
+  <div class="container reveal">
+    <div class="cta-band">
+      <div>
+        <h2>Ready to access your dashboard?</h2>
+        <p>Log in to securely manage your applications, submit documents, and track correspondence with BOCRA.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-secondary" style="background:#ffffff; color:#111111; border:none;">Access Dashboard</a>
+        <a href="#" class="btn btn-secondary" style="background:transparent; color:#ffffff; border:1px solid rgba(255,255,255,0.35);">Create Account</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="map-section">
+  <div class="map-section">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3587.659359675841!2d25.918903!3d-24.660144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ebf3a388b10850b%3A0x6b7fa09d0d34b3f0!2sBotswana%20Communications%20Regulatory%20Authority!5e0!3m2!1sen!2sbw!4v1700000000000!5m2!1sen!2sbw"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer" id="footer">
+  <div class="container footer-grid">
       
       <div class="footer-brand">
         <h2 class="brand" style="margin-bottom: 16px; padding:0;">
@@ -761,11 +823,16 @@
     </div>
   </footer>
 
-  <button class="whatsapp-button" id="whatsappButton" aria-label="Chat with WhatsApp">
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.781 1.149c-1.488.823-2.693 2.015-3.512 3.54C2.665 10.478 2.234 12.634 2.789 14.514c.555 1.88 1.707 3.491 3.28 4.568.822.547 1.578.89 2.212 1.084.96.308 1.926.274 2.721-.039 0 0 .46-.196.883-.393 1.12-.559 1.887-.845 2.242-1.056.32-.19.639-.605.991-.857.352-.252 1.102-.802 1.405-1.432.303-.63.303-1.202.212-1.334-.091-.132-.303-.214-6.335-1.994m8.465-13.979C19.776 1.465 15.935.834 12.562.834c-3.372 0-7.214.63-10.172 1.899C.931 3.902 0 5.754 0 7.888c0 2.134.931 3.986 2.39 5.055-1.459 4.224-.183 9.426 3.285 12.822 3.468 3.396 8.64 4.755 13.314 3.882 4.675-.873 8.328-4.515 9.372-9.156 1.043-4.641-.183-9.426-3.285-12.822z" />
-    </svg>
-  </button>
+  <a
+    href="https://wa.me/2673957755?text=Hello%20BOCRA%2C%20I%20would%20like%20assistance."
+    class="whatsapp-button"
+    id="whatsappButton"
+    aria-label="Chat on WhatsApp"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <i class="bx bxl-whatsapp"></i>
+  </a>
 
   <button class="chatbot-launcher" id="chatbotLauncher" aria-label="Open chatbot">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

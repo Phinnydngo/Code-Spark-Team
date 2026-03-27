@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>BOCRA Domain Services</title>
   <meta name="description" content="Apply for domain registration and hosting services with BOCRA." />
-
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -556,8 +556,8 @@
     </section>
   </main>
 
-  <footer class="site-footer" id="footer">
-    <div class="container footer-grid">
+<footer class="site-footer" id="footer">
+  <div class="container footer-grid">
       
       <div class="footer-brand">
         <h2 class="brand" style="margin-bottom: 16px; padding:0;">
@@ -658,11 +658,16 @@
     </div>
   </footer>
 
-  <button class="whatsapp-button" id="whatsappButton" aria-label="Chat with WhatsApp">
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 2.721-.039 0 0 .46-.196.883-.393 1.12-.559 1.887-.845 2.242-1.056.32-.19.639-.605.991-.857.352-.252 1.102-.802 1.405-1.432.303-.63.303-1.202.212-1.334-.091-.132-.303-.214-6.335-1.994m8.465-13.979C19.776 1.465 15.935.834 12.562.834c-3.372 0-7.214.63-10.172 1.899C.931 3.902 0 5.754 0 7.888c0 2.134.931 3.986 2.39 5.055-1.459 4.224-.183 9.426 3.285 12.822 3.468 3.396 8.64 4.755 13.314 3.882 4.675-.873 8.328-4.515 9.372-9.156 1.043-4.641-.183-9.426-3.285-12.822z" />
-    </svg>
-  </button>
+  <a
+    href="https://wa.me/2673957755?text=Hello%20BOCRA%2C%20I%20would%20like%20assistance."
+    class="whatsapp-button"
+    id="whatsappButton"
+    aria-label="Chat on WhatsApp"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <i class="bx bxl-whatsapp"></i>
+  </a>
 
   <button class="chatbot-launcher" id="chatbotLauncher" aria-label="Open chatbot">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -675,21 +680,336 @@
   </button>
 
   <aside class="chatbot-panel" id="chatbotPanel" aria-hidden="true">
-    <div class="chatbot-header">
-      <h3>Chat with BOCRA</h3>
-      <button id="closeChatbot" aria-label="Close chatbot">&times;</button>
-    </div>
-    <div class="chatbot-messages" id="chatbotMessages">
-      <div class="message bot">
-        <p>Hello! How can I help you with BOCRA services today?</p>
+    <div class="chatbot-head">
+      <div class="chatbot-title">
+        <div class="chatbot-title-text">
+          
+        </div>
+      </div>
+
+      <div class="chatbot-tools">
+        <label class="sr-only" for="chatbotLang" style="display:none;">Language</label>
+        <select id="chatbotLang" aria-label="Language">
+          <option value="en" selected>English</option>
+          <option value="tn">Setswana</option>
+        </select>
+        <button class="chatbot-close" id="chatbotClose" aria-label="Close chatbot">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
     </div>
-    <div class="chatbot-input">
-      <input type="text" id="chatbotInput" placeholder="Type your message..." />
-      <button id="sendMessage">Send</button>
+
+    <div class="chatbot-body" id="chatbotBody" role="log" aria-live="polite" aria-relevant="additions">
+      </div>
+
+    <div class="chatbot-foot">
+      <form class="chatbot-form" id="chatbotForm">
+        <input id="chatbotInput" type="text" placeholder="Ask about licences, complaints, domains..." autocomplete="off" />
+        <button class="chatbot-send" type="submit">Send</button>
+      </form>
+
     </div>
   </aside>
 
-  <script src="js/domains.js"></script>
+  <div id="cookieBanner" class="cookie-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-surface); border-top: 1px solid var(--border-color); padding: 16px 24px; z-index: 9999; box-shadow: 0 -4px 24px rgba(0,0,0,0.1); transform: translateY(100%); transition: transform 0.4s ease; display: flex; justify-content: center;">
+    <div class="cookie-content" style="max-width: 1200px; display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%;">
+      <p style="margin: 0; font-size: 0.9rem; color: var(--text-main); font-weight: 500;">
+        We use cookies to enhance your experience, analyze site traffic, and support our regulatory mandate. By continuing to use this site, you consent to our use of cookies.
+      </p>
+      <div class="cookie-actions" style="display: flex; gap: 12px; flex-shrink: 0;">
+        <button id="acceptCookies" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Accept</button>
+        <button id="declineCookies" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- WhatsApp Integration ---
+    const whatsappButton = document.getElementById('whatsappButton');
+    const whatsappNumber = '26775466578';
+    const whatsappMessage = 'Hello BOCRA! I would like to inquire about your services.';
+    
+    whatsappButton.addEventListener('click', () => {
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+      window.open(whatsappURL, '_blank');
+    });
+
+    // --- Auto-update Copyright Year ---
+    const currentYearSpan = document.getElementById('year-current');
+    if (currentYearSpan) {
+      currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- Mega Menu Click Logic ---
+    const navItems = document.querySelectorAll('.desktop-nav .nav-item');
+    navItems.forEach(item => {
+      const link = item.querySelector('.nav-link');
+      if(link) {
+        link.addEventListener('click', (e) => {
+          e.preventDefault(); 
+          navItems.forEach(other => {
+            if(other !== item) other.classList.remove('active-dropdown');
+          });
+          item.classList.toggle('active-dropdown');
+        });
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if(!e.target.closest('.desktop-nav')) {
+        navItems.forEach(item => item.classList.remove('active-dropdown'));
+      }
+    });
+
+    // --- Theme Toggle Logic ---
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const rootEl = document.documentElement;
+
+    const savedTheme = localStorage.getItem('bocra_theme') || 'light';
+    rootEl.setAttribute('data-theme', savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = rootEl.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      rootEl.setAttribute('data-theme', newTheme);
+      localStorage.setItem('bocra_theme', newTheme);
+    });
+
+    // --- Mobile Drawer Logic ---
+    const openDrawerBtn = document.getElementById("openDrawer");
+    const closeDrawerBtn = document.getElementById("closeDrawer");
+    const mobileDrawer = document.getElementById("mobileDrawer");
+    const drawerOverlay = document.getElementById("drawerOverlay");
+
+    function toggleDrawer() {
+      mobileDrawer.classList.toggle("open");
+      drawerOverlay.classList.toggle("show");
+      document.body.style.overflow = mobileDrawer.classList.contains("open") ? "hidden" : "";
+    }
+
+    if (openDrawerBtn) openDrawerBtn.addEventListener("click", toggleDrawer);
+    if (closeDrawerBtn) closeDrawerBtn.addEventListener("click", toggleDrawer);
+    if (drawerOverlay) drawerOverlay.addEventListener("click", toggleDrawer);
+
+    // --- Scroll Reveal Animations ---
+    const revealTargets = document.querySelectorAll(".reveal, .metrics-panel");
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    
+    revealTargets.forEach((item) => revealObserver.observe(item));
+
+    // --- Number Counting Animation ---
+    const counters = document.querySelectorAll(".count-up");
+    const countObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseFloat(el.getAttribute('data-target'));
+          const decimals = parseInt(el.getAttribute('data-decimals')) || 0;
+          
+          let startTimestamp = null;
+          const duration = 1500;
+          const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const current = target * easeOutQuart;
+            
+            if (decimals > 0) {
+                el.innerText = current.toFixed(decimals);
+            } else {
+                el.innerText = Math.floor(current).toLocaleString();
+            }
+            
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            } else {
+               if (decimals > 0) el.innerText = target.toFixed(decimals);
+               else el.innerText = target.toLocaleString();
+            }
+          };
+          window.requestAnimationFrame(step);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => countObserver.observe(counter));
+
+    // --- Full Chatbot Logic (English / Setswana) ---
+    const chatbotLauncher = document.getElementById("chatbotLauncher");
+    const chatbotPanel = document.getElementById("chatbotPanel");
+    const chatbotClose = document.getElementById("chatbotClose");
+    const chatbotBody = document.getElementById("chatbotBody");
+    const chatbotForm = document.getElementById("chatbotForm");
+    const chatbotInput = document.getElementById("chatbotInput");
+    const chatbotLang = document.getElementById("chatbotLang");
+
+    const KB = {
+      en: {
+        hello: "Hi — I’m the BOCRA Assistant. I can guide you to licensing, complaints, domain services, consultations, Tarrifs updates, and resources on this page.",
+        fallback: "I can help you find the right service fast. Tell me what you want to do (e.g., apply for a licence, file a complaint, verify a licence, manage domains).",
+        quick: ["Apply for Licence", "File a Complaint", "Verify Licence", "Manage Domains", "Consultations", "Cyber Alerts"],
+        intents: [
+          { keys: ["apply", "application", "licence", "license"], answer: "To start a licence application, use **Apply for Licence** in the Quick Actions area.", link: "#quick-actions" },
+          { keys: ["verify", "check", "status", "register"], answer: "To verify a licence, use **Verify Licence** under Quick Actions.", link: "#quick-actions" },
+          { keys: ["complaint", "complaints", "report", "issue", "consumer"], answer: "To file a complaint, select **File a Complaint** under Quick Actions.", link: "#quick-actions" },
+          { keys: ["domain", ".bw", "whois", "registrar"], answer: "For domain services, use **Manage Domains** under Quick Actions.", link: "#quick-actions" },
+          { keys: ["consultation", "consultations", "deadline"], answer: "For consultations, check the **Latest updates** section.", link: "#updates" },
+          { keys: ["cyber", "Tarrifs", "security", "alert", "threat"], answer: "For Tarrifs information, check **Latest updates** (Cyber Alert).", link: "#updates" },
+          { keys: ["statistics", "stats", "metrics", "numbers"], answer: "Key performance indicators are shown in **Key statistics**.", link: "#quick-actions" },
+        ],
+      },
+      tn: {
+        hello: "Dumêla — Nna ke Mothusi wa BOCRA. Ke ka go thusa go fitlhela ditirelo tsa dilaesense, dingongorego, ditirelo tsa domain, le dikitsiso mo tsebeng eno.",
+        fallback: "Mpolelele se o batlang go se dira (sekai: go dira kopo ya laesense, go tsenya ngongorego, go netefatsa laesense).",
+        quick: ["Apply for Licence", "File a Complaint", "Verify Licence", "Manage Domains", "Consultations", "Cyber Alerts"],
+        intents: [
+          { keys: ["apply", "application", "licence", "license", "laesense", "kopo"], answer: "Go simolola kopo ya laesense, dirisa **Apply for Licence** mo Quick Actions.", link: "#quick-actions" },
+          { keys: ["verify", "check", "status", "netefatsa", "register"], answer: "Go netefatsa laesense, dirisa **Verify Licence** mo Quick Actions.", link: "#quick-actions" },
+          { keys: ["complaint", "complaints", "ngongorego", "report", "issue", "consumer"], answer: "Go tsenya ngongorego, tlhopha **File a Complaint** mo Quick Actions.", link: "#quick-actions" },
+          { keys: ["domain", ".bw", "whois", "registrar"], answer: "Ka ga ditirelo tsa domain, dirisa **Manage Domains** mo Quick Actions.", link: "#quick-actions" },
+          { keys: ["consultation", "consultations", "dipuisano"], answer: "Ka ga dipuisano, lebelela **Latest updates**.", link: "#updates" },
+          { keys: ["cyber", "Tarrifs", "security", "alert"], answer: "Ka ga Tarrifs, lebelela **Latest updates** (Cyber Alert).", link: "#updates" },
+          { keys: ["statistics", "stats", "metrics", "dipalo"], answer: "Dipalo tsa botlhokwa di mo **Key statistics**.", link: "#quick-actions" },
+        ],
+      },
+    };
+
+    function setLang(lang) {
+      const selected = KB[lang] ? lang : "en";
+      chatbotLang.value = selected;
+      localStorage.setItem("bocra_chat_lang", selected);
+      chatbotInput.placeholder = selected === "tn" ? "Botsisa ka dilaesense, dingongorego..." : "Ask about licences, complaints, domains...";
+    }
+
+    function scrollToAnchor(hash) {
+      const el = document.querySelector(hash);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function addMessage({ role, text, quickReplies }) {
+      const row = document.createElement("div");
+      row.className = `chat-row ${role}`;
+      const bubble = document.createElement("div");
+      bubble.className = `chat-bubble ${role}`;
+      bubble.textContent = text;
+      row.appendChild(bubble);
+      chatbotBody.appendChild(row);
+
+      if (quickReplies && quickReplies.length) {
+        const quick = document.createElement("div");
+        quick.className = "chat-quick";
+        quickReplies.forEach((label) => {
+          const chip = document.createElement("button");
+          chip.type = "button";
+          chip.className = "chat-chip";
+          chip.textContent = label;
+          chip.addEventListener("click", () => {
+            chatbotInput.value = label;
+            chatbotForm.dispatchEvent(new Event("submit", { cancelable: true }));
+          });
+          quick.appendChild(chip);
+        });
+        chatbotBody.appendChild(quick);
+      }
+      chatbotBody.scrollTop = chatbotBody.scrollHeight;
+    }
+
+    function findIntentAnswer(lang, message) {
+      const kb = KB[lang] || KB.en;
+      const input = message.toLowerCase();
+      for (const intent of kb.intents) {
+        if (intent.keys.some((k) => input.includes(k))) return intent;
+      }
+      return null;
+    }
+
+    function botReply(message) {
+      const lang = chatbotLang.value || "en";
+      const kb = KB[lang] || KB.en;
+      const trimmed = message.trim();
+      if (!trimmed) return;
+
+      if (/^(hi|hello|hey|dum[eê]la|dumela)\b/i.test(trimmed)) {
+        addMessage({ role: "bot", text: kb.hello, quickReplies: kb.quick });
+        return;
+      }
+
+      const intent = findIntentAnswer(lang, trimmed);
+      if (intent) {
+        addMessage({ role: "bot", text: intent.answer, quickReplies: kb.quick.slice(0, 3) });
+        if (intent.link) {
+          const follow = lang === "tn" ? "Ke go isa mo karolong e e amang seno mo tsebeng." : "I’ll take you to the relevant section on this page.";
+          addMessage({ role: "bot", text: follow });
+          scrollToAnchor(intent.link);
+        }
+        return;
+      }
+      addMessage({ role: "bot", text: kb.fallback, quickReplies: kb.quick });
+    }
+
+    function toggleChatbot() {
+      chatbotPanel.classList.toggle("open");
+      if (chatbotPanel.classList.contains("open")) {
+        setTimeout(() => chatbotInput.focus(), 50);
+        if (!chatbotBody.dataset.booted) {
+          chatbotBody.dataset.booted = "true";
+          const lang = chatbotLang.value || "en";
+          addMessage({ role: "bot", text: (KB[lang] || KB.en).hello, quickReplies: (KB[lang] || KB.en).quick });
+        }
+      }
+    }
+
+    if (chatbotLauncher) chatbotLauncher.addEventListener("click", toggleChatbot);
+    if (chatbotClose) chatbotClose.addEventListener("click", toggleChatbot);
+
+    if (chatbotLang) {
+      const saved = localStorage.getItem("bocra_chat_lang") || "en";
+      setLang(saved);
+      chatbotLang.addEventListener("change", () => {
+        setLang(chatbotLang.value);
+        const lang = chatbotLang.value || "en";
+        const prompt = lang === "tn" ? "Puo e fetotswe. O ka botsa potso." : "Language updated. Ask your question.";
+        addMessage({ role: "bot", text: prompt, quickReplies: (KB[lang] || KB.en).quick });
+      });
+    }
+
+    if (chatbotForm) {
+      chatbotForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const text = chatbotInput.value;
+        if (!text.trim()) return;
+        chatbotInput.value = "";
+        addMessage({ role: "user", text });
+        setTimeout(() => botReply(text), 300);
+      });
+    }
+
+    // --- Cookie Banner Logic (Pops up every time on refresh) ---
+    const cookieBanner = document.getElementById('cookieBanner');
+    const acceptBtn = document.getElementById('acceptCookies');
+    const declineBtn = document.getElementById('declineCookies');
+
+    // Force pop up 1 second after every page load
+    setTimeout(() => {
+      if(cookieBanner) cookieBanner.style.transform = 'translateY(0)';
+    }, 1000);
+
+    function hideCookieBanner() {
+      if(cookieBanner) cookieBanner.style.transform = 'translateY(100%)';
+    }
+
+    if (acceptBtn) acceptBtn.addEventListener('click', hideCookieBanner);
+    if (declineBtn) declineBtn.addEventListener('click', hideCookieBanner);
+  </script>
 </body>
 </html>
