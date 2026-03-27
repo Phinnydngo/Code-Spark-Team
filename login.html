@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOCRA Login / Register Form</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/formstyle.css" />
+</head>
+<body>
+  <div class="container" id="authContainer">
+    <a href="index.html" class="back-arrow" aria-label="Go back to home">
+    &#8592;
+    </a>
+    <!-- Login -->
+    <div class="form-box login">
+      <form id="loginForm">
+        <h1>Login</h1>
+        <p>Access your account using your role and credentials.</p>
+
+        <div class="input-box">
+          <select required>
+            <option value="" disabled selected>Select User Role</option>
+            <option value="business">Business</option>
+            <option value="researcher">Researcher</option>
+            <option value="staff">Staff</option>
+            <option value="operator">Operator</option>
+            <option value="citizen">Citizen</option>
+          </select>
+          <i class="bx bxs-user-badge"></i>
+        </div>
+
+        <div class="input-box">
+          <input type="email" placeholder="Email" required />
+          <i class="bx bxs-envelope"></i>
+        </div>
+
+        <div class="input-box">
+          <input type="password" placeholder="Password" required />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <div class="forgot-link">
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+
+        <p class="social-text">or continue with</p>
+
+        <div class="social-icons">
+          <a href="#" class="social-link" data-provider="Google" aria-label="Login with Google">
+            <i class="bx bxl-google"></i>
+          </a>
+          <a href="#" class="social-link" data-provider="Apple" aria-label="Login with Apple">
+            <i class="bx bxl-apple"></i>
+          </a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Register -->
+    <div class="form-box register">
+      <form id="registerForm">
+        <h1>Registration</h1>
+        <p>Create your account and choose the correct user role.</p>
+
+        <div class="input-box">
+          <input type="text" placeholder="Full Name" required />
+          <i class="bx bxs-user"></i>
+        </div>
+
+        <div class="input-box">
+          <select required>
+            <option value="" disabled selected>Select User Role</option>
+            <option value="business">Business</option>
+            <option value="researcher">Researcher</option>
+            <option value="staff">Staff</option>
+            <option value="operator">Operator</option>
+            <option value="citizen">Citizen</option>
+          </select>
+          <i class="bx bxs-user-badge"></i>
+        </div>
+
+        <div class="input-box">
+          <input type="email" placeholder="Email" required />
+          <i class="bx bxs-envelope"></i>
+        </div>
+
+        <div class="input-box">
+          <input type="password" placeholder="Password" required />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+
+        <p class="social-text">or register with</p>
+
+        <div class="social-icons">
+          <a href="#" class="social-link" data-provider="Google" aria-label="Register with Google">
+            <i class="bx bxl-google"></i>
+          </a>
+          <a href="#" class="social-link" data-provider="Apple" aria-label="Register with Apple">
+            <i class="bx bxl-apple"></i>
+          </a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Toggle Panels -->
+    <div class="toggle-box">
+      <div class="toggle-panel toggle-left">
+        <h1>Hello, Welcome!</h1>
+        <p>Don't have an account? Register to get started.</p>
+        <button type="button" class="btn register-btn">Register</button>
+      </div>
+
+      <div class="toggle-panel toggle-right">
+        <h1>Welcome Back!</h1>
+        <p>Already have an account? Login to continue.</p>
+        <button type="button" class="btn login-btn">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dummy Social Login Modal -->
+  <div class="modal-overlay" id="socialModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeModal" aria-label="Close modal">&times;</button>
+      <div class="modal-icon">
+        <i class="bx bx-link-external"></i>
+      </div>
+      <h2 id="modalTitle">Continue with Google</h2>
+      <p id="modalText">
+        This is a demo social login prompt. In a real system, this would redirect to the provider for authentication.
+      </p>
+      <div class="modal-actions">
+        <button class="btn small-btn" id="continueSocial">Continue</button>
+        <button class="btn small-btn alt-btn" id="cancelSocial">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/form.js"></script>
+
+</body>
+</html>
