@@ -1,0 +1,158 @@
+# BOCRA Digital Portal Front-End
+ 
+This project is a front-end prototype for the **Botswana Communications Regulatory Authority (BOCRA)** digital platform.  
+
+It is built as a **static website** using standard web technologies and is designed to demonstrate the structure, navigation, and user experience of the portal before backend integration.
+ 
+The platform includes pages and service areas such as:
+ 
+- Home
+
+- About
+
+- Mandate
+
+- Consumers
+
+- Licences
+
+- Media
+
+- Tenders
+
+- Domains
+
+- Tariffs
+
+- Other related service pages
+ 
+## Technologies Used
+ 
+This system uses:
+ 
+- **HTML5** for structure
+
+- **CSS3** for styling and responsive layout
+
+- **JavaScript** for interactivity
+
+- **Boxicons** for icons
+
+- **Google Maps Embed** for location display
+
+- **Google Fonts** if included in the project
+
+- **VS Code** as the main development environment
+
+- **Live Server** extension in VS Code for local testing
+
+- **Git / GitHub** for version control and collaboration
+ 
+## Recommended Tools
+ 
+Install and use the following tools:
+ 
+### 1. Visual Studio Code
+
+Used to edit and manage the project files.
+ 
+### 2. Live Server Extension
+
+Used to run the site locally in the browser.
+ 
+VS Code extension name:
+
+`Live Server`
+ 
+### 3. Git
+
+Used for version control, pull, commit, merge, and push operations.
+ 
+### 4. Web Browser
+
+Recommended:
+
+- Google Chrome
+
+- Microsoft Edge
+ 
+## Project Structure
+ 
+A typical structure for this project looks like this:
+ 
+```text
+
+project-folder/
+
+│
+
+├── index.html
+
+├── about.html
+
+├── mandate.html
+
+├── consumers.html
+
+├── licenses.html
+
+├── media.html
+
+├── tenders.html
+
+├── domains.html
+
+├── tariffs.html
+
+├── businesses.html
+
+│
+
+├── css/
+
+│   └── style.css
+
+│
+
+├── js/
+
+│   └── script.js
+
+│
+
+├── assets/
+
+│   ├── director-1.jpg
+
+│   ├── director-2.jpg
+
+│   ├── director-3.jpg
+
+│   ├── director-4.jpg
+
+│   ├── manager-1.jpg
+
+│   ├── manager-2.jpg
+
+│   ├── manager-3.jpg
+
+│   ├── manager-4.jpg
+
+│   └── other images/videos/icons
+
+│
+
+└── README.md
+ 
+How to Run the Project
+Option 1: Using Live Server in VS Code
+Open the project folder in VS Code
+Make sure all project files are inside the same root folder
+Install the Live Server extension if not already installed
+Right-click index.html
+Click Open with Live Server
+The project will open in your browser
+Example local URL:
+http://127.0.0.1:5500/index.html
+From there, all linked pages such as about.html, mandate.html, and tenders.html should open correctly if they are in the same folder.
+ 
