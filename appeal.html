@@ -460,14 +460,14 @@
   </header>
 
 <main class="tender-detail-page">
-  <section class="tender-page-hero gold">
+  <section class="tender-page-hero green">
     <div class="container">
       <div class="tender-page-topbar">
         <a href="tenders.html" class="tender-page-nav-btn" aria-label="Back to tenders"><i class='bx bx-arrow-back'></i></a>
         <div class="tender-page-title-wrap">
           <p class="tender-page-kicker">BOCRA Procurement</p>
-          <h1>Tender Results</h1>
-          <p class="tender-page-subtitle">Review published awards, shortlisted bidders, and procurement outcomes.</p>
+          <h1>Appeal</h1>
+          <p class="tender-page-subtitle">Review procurement appeal requirements and submit an appeal request.</p>
         </div>
         <a href="index.html" class="tender-page-nav-btn" aria-label="Go home"><i class='bx bx-home-alt'></i></a>
       </div>
@@ -475,45 +475,40 @@
   </section>
 
   <section class="tender-page-section">
-    <div class="container">
+    <div class="container tender-page-grid">
       <div class="tender-card">
-        <h2>Published Results</h2>
-        <div class="simple-table-wrap">
-          <table class="simple-table">
-            <thead>
-              <tr>
-                <th>Tender Ref</th>
-                <th>Title</th>
-                <th>Status</th>
-                <th>Decision Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>BOCRA/NET/2026/03</td>
-                <td>Network Security Enhancement Services</td>
-                <td><span class="status-badge status-green">Awarded</span></td>
-                <td>28 Mar 2026</td>
-              </tr>
-              <tr>
-                <td>BOCRA/DIG/2026/02</td>
-                <td>Digital Content Management Upgrade</td>
-                <td><span class="status-badge status-green">Awarded</span></td>
-                <td>21 Mar 2026</td>
-              </tr>
-              <tr>
-                <td>BOCRA/CONS/2026/01</td>
-                <td>Consultancy for Regulatory Analytics Framework</td>
-                <td><span class="status-badge status-gold">Under Review</span></td>
-                <td>Pending</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h2>Appeal Form</h2>
+        <form class="tender-form-grid">
+          <div class="form-field">
+            <label>Tender Reference</label>
+            <input type="text" placeholder="Enter tender reference">
+          </div>
+          <div class="form-field">
+            <label>Appeal Date</label>
+            <input type="date">
+          </div>
+          <div class="form-field full">
+            <label>Grounds for Appeal</label>
+            <textarea rows="6" placeholder="State the grounds for appeal."></textarea>
+          </div>
+          <div class="form-field full">
+            <label>Supporting Documents</label>
+            <input type="file" multiple>
+          </div>
+          <div class="form-actions full">
+            <button type="submit" class="btn btn-primary">Submit Appeal</button>
+          </div>
+        </form>
       </div>
+
+      <aside class="tender-card">
+        <h3>Appeal Notes</h3>
+        <p>Appeals should be submitted within the permissible timeframe and must include sufficient supporting documentation.</p>
+      </aside>
     </div>
   </section>
 </main>
+
   <footer class="site-footer" id="footer">
     <div class="container footer-grid">
       <div class="footer-brand">

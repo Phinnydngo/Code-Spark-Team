@@ -466,8 +466,8 @@
         <a href="tenders.html" class="tender-page-nav-btn" aria-label="Back to tenders"><i class='bx bx-arrow-back'></i></a>
         <div class="tender-page-title-wrap">
           <p class="tender-page-kicker">BOCRA Procurement</p>
-          <h1>Tender Results</h1>
-          <p class="tender-page-subtitle">Review published awards, shortlisted bidders, and procurement outcomes.</p>
+          <h1>Best &amp; Final Offer</h1>
+          <p class="tender-page-subtitle">Manage final offer response details and review submission conditions for shortlisted bidders.</p>
         </div>
         <a href="index.html" class="tender-page-nav-btn" aria-label="Go home"><i class='bx bx-home-alt'></i></a>
       </div>
@@ -475,45 +475,45 @@
   </section>
 
   <section class="tender-page-section">
-    <div class="container">
+    <div class="container tender-page-grid">
       <div class="tender-card">
-        <h2>Published Results</h2>
-        <div class="simple-table-wrap">
-          <table class="simple-table">
-            <thead>
-              <tr>
-                <th>Tender Ref</th>
-                <th>Title</th>
-                <th>Status</th>
-                <th>Decision Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>BOCRA/NET/2026/03</td>
-                <td>Network Security Enhancement Services</td>
-                <td><span class="status-badge status-green">Awarded</span></td>
-                <td>28 Mar 2026</td>
-              </tr>
-              <tr>
-                <td>BOCRA/DIG/2026/02</td>
-                <td>Digital Content Management Upgrade</td>
-                <td><span class="status-badge status-green">Awarded</span></td>
-                <td>21 Mar 2026</td>
-              </tr>
-              <tr>
-                <td>BOCRA/CONS/2026/01</td>
-                <td>Consultancy for Regulatory Analytics Framework</td>
-                <td><span class="status-badge status-gold">Under Review</span></td>
-                <td>Pending</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h2>Final Offer Submission</h2>
+        <form class="tender-form-grid">
+          <div class="form-field">
+            <label>Shortlisted Tender Ref</label>
+            <input type="text" placeholder="Enter tender reference">
+          </div>
+          <div class="form-field">
+            <label>Final Offer Date</label>
+            <input type="date">
+          </div>
+          <div class="form-field full">
+            <label>Updated Commercial Offer</label>
+            <input type="file">
+          </div>
+          <div class="form-field full">
+            <label>Revised Technical Response</label>
+            <input type="file">
+          </div>
+          <div class="form-field full">
+            <label>Notes</label>
+            <textarea rows="5" placeholder="Provide any final submission notes."></textarea>
+          </div>
+          <div class="form-actions full">
+            <button type="button" class="btn btn-secondary">Save Draft</button>
+            <button type="submit" class="btn btn-primary">Submit Final Offer</button>
+          </div>
+        </form>
       </div>
+
+      <aside class="tender-card">
+        <h3>Submission Notes</h3>
+        <p>Only shortlisted bidders invited by BOCRA may submit a best and final offer. All revised documents should clearly indicate superseded versions.</p>
+      </aside>
     </div>
   </section>
 </main>
+
   <footer class="site-footer" id="footer">
     <div class="container footer-grid">
       <div class="footer-brand">

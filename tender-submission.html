@@ -460,14 +460,14 @@
   </header>
 
 <main class="tender-detail-page">
-  <section class="tender-page-hero gold">
+  <section class="tender-page-hero green">
     <div class="container">
       <div class="tender-page-topbar">
         <a href="tenders.html" class="tender-page-nav-btn" aria-label="Back to tenders"><i class='bx bx-arrow-back'></i></a>
         <div class="tender-page-title-wrap">
           <p class="tender-page-kicker">BOCRA Procurement</p>
-          <h1>Tender Results</h1>
-          <p class="tender-page-subtitle">Review published awards, shortlisted bidders, and procurement outcomes.</p>
+          <h1>Tender Submission</h1>
+          <p class="tender-page-subtitle">Complete the tender submission form and attach the required bid documents.</p>
         </div>
         <a href="index.html" class="tender-page-nav-btn" aria-label="Go home"><i class='bx bx-home-alt'></i></a>
       </div>
@@ -475,45 +475,120 @@
   </section>
 
   <section class="tender-page-section">
-    <div class="container">
+    <div class="container tender-page-grid">
       <div class="tender-card">
-        <h2>Published Results</h2>
-        <div class="simple-table-wrap">
-          <table class="simple-table">
-            <thead>
-              <tr>
-                <th>Tender Ref</th>
-                <th>Title</th>
-                <th>Status</th>
-                <th>Decision Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>BOCRA/NET/2026/03</td>
-                <td>Network Security Enhancement Services</td>
-                <td><span class="status-badge status-green">Awarded</span></td>
-                <td>28 Mar 2026</td>
-              </tr>
-              <tr>
-                <td>BOCRA/DIG/2026/02</td>
-                <td>Digital Content Management Upgrade</td>
-                <td><span class="status-badge status-green">Awarded</span></td>
-                <td>21 Mar 2026</td>
-              </tr>
-              <tr>
-                <td>BOCRA/CONS/2026/01</td>
-                <td>Consultancy for Regulatory Analytics Framework</td>
-                <td><span class="status-badge status-gold">Under Review</span></td>
-                <td>Pending</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h2>Submission Form</h2>
+        <form class="tender-form-grid">
+          <div class="form-field">
+            <label for="tenderRef">Tender Reference</label>
+            <input type="text" id="tenderRef" placeholder="e.g. BOCRA/ICT/2026/01">
+          </div>
+
+          <div class="form-field">
+            <label for="submissionDate">Submission Date</label>
+            <input type="date" id="submissionDate">
+          </div>
+
+          <div class="form-field full">
+            <label for="tenderTitle">Tender Title</label>
+            <input type="text" id="tenderTitle" placeholder="Enter tender title">
+          </div>
+
+          <div class="form-field">
+            <label for="companyName">Company Name</label>
+            <input type="text" id="companyName" placeholder="Enter company name">
+          </div>
+
+          <div class="form-field">
+            <label for="registrationNo">Company Registration Number</label>
+            <input type="text" id="registrationNo" placeholder="Enter company registration number">
+          </div>
+
+          <div class="form-field">
+            <label for="contactPerson">Contact Person</label>
+            <input type="text" id="contactPerson" placeholder="Enter contact person">
+          </div>
+
+          <div class="form-field">
+            <label for="contactEmail">Email Address</label>
+            <input type="email" id="contactEmail" placeholder="Enter email address">
+          </div>
+
+          <div class="form-field">
+            <label for="contactPhone">Phone Number</label>
+            <input type="tel" id="contactPhone" placeholder="+267...">
+          </div>
+
+          <div class="form-field">
+            <label for="category">Procurement Category</label>
+            <select id="category">
+              <option value="">Select category</option>
+              <option>ICT Services</option>
+              <option>Consulting Services</option>
+              <option>Infrastructure</option>
+              <option>Security Solutions</option>
+              <option>Communications Equipment</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="bidAmount">Bid Amount (BWP)</label>
+            <input type="number" id="bidAmount" placeholder="Enter amount">
+          </div>
+
+          <div class="form-field">
+            <label for="deliveryPeriod">Delivery Period</label>
+            <input type="text" id="deliveryPeriod" placeholder="e.g. 8 weeks">
+          </div>
+
+          <div class="form-field full">
+            <label for="technicalProposal">Technical Proposal</label>
+            <input type="file" id="technicalProposal">
+          </div>
+
+          <div class="form-field full">
+            <label for="financialProposal">Financial Proposal</label>
+            <input type="file" id="financialProposal">
+          </div>
+
+          <div class="form-field full">
+            <label for="supportDocs">Supporting Documents</label>
+            <input type="file" id="supportDocs" multiple>
+          </div>
+
+          <div class="form-field full">
+            <label for="submissionNotes">Submission Notes</label>
+            <textarea id="submissionNotes" rows="5" placeholder="Add any notes or cover message."></textarea>
+          </div>
+
+          <div class="form-field full form-check">
+            <label>
+              <input type="checkbox">
+              I confirm that the submitted information and attached documents are complete and accurate.
+            </label>
+          </div>
+
+          <div class="form-actions full">
+            <button type="button" class="btn btn-secondary">Save Draft</button>
+            <button type="submit" class="btn btn-primary">Submit Tender</button>
+          </div>
+        </form>
       </div>
+
+      <aside class="tender-card">
+        <h3>Submission Checklist</h3>
+        <div class="doc-list">
+          <div class="doc-item"><span>Technical Proposal</span><small>Required</small></div>
+          <div class="doc-item"><span>Financial Proposal</span><small>Required</small></div>
+          <div class="doc-item"><span>Company Registration</span><small>Required</small></div>
+          <div class="doc-item"><span>Tax Clearance</span><small>Required</small></div>
+          <div class="doc-item"><span>Supporting Annexures</span><small>Optional</small></div>
+        </div>
+      </aside>
     </div>
   </section>
 </main>
+
   <footer class="site-footer" id="footer">
     <div class="container footer-grid">
       <div class="footer-brand">
