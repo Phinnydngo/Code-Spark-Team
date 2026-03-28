@@ -909,26 +909,38 @@
       currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    // --- Mega Menu Click Logic ---
-    const navItems = document.querySelectorAll('.desktop-nav .nav-item');
-    navItems.forEach(item => {
-      const link = item.querySelector('.nav-link');
-      if(link) {
-        link.addEventListener('click', (e) => {
-          e.preventDefault(); 
-          navItems.forEach(other => {
-            if(other !== item) other.classList.remove('active-dropdown');
-          });
-          item.classList.toggle('active-dropdown');
-        });
-      }
-    });
+  // --- Mega Menu Click Logic ---
+  const navItems = document.querySelectorAll('.desktop-nav .nav-item');
 
-    document.addEventListener('click', (e) => {
-      if(!e.target.closest('.desktop-nav')) {
-        navItems.forEach(item => item.classList.remove('active-dropdown'));
+  navItems.forEach((item) => {
+    const link = item.querySelector('.nav-link');
+    const megaMenu = item.querySelector('.mega-menu');
+
+    if (!link) return;
+
+    link.addEventListener('click', (e) => {
+      // Only treat items with dropdowns as toggle buttons
+      if (megaMenu) {
+        e.preventDefault();
+
+        navItems.forEach((other) => {
+          if (other !== item) {
+            other.classList.remove('active-dropdown');
+          }
+        });
+
+        item.classList.toggle('active-dropdown');
       }
+      // Items without .mega-menu, like Domains and Tariffs,
+      // will follow their href normally
     });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.desktop-nav')) {
+      navItems.forEach((item) => item.classList.remove('active-dropdown'));
+    }
+  });
 
     // --- Theme Toggle Logic ---
     const themeToggleBtn = document.getElementById('themeToggle');
